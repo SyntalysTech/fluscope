@@ -18,7 +18,7 @@ import { LanguageSelector, Lang } from '@/components/LanguageSelector';
 import { TemplateSelector } from '@/components/TemplateSelector';
 import { getLayoutedElements } from '@/lib/autoLayout';
 import { SmartBuilderModal } from '@/components/SmartBuilderModal';
-import { Sparkles, Activity, Wrench, MousePointer2, LayoutTemplate, GitBranch, TerminalSquare, Play, Settings, Eraser, Crosshair, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Sparkles, Activity, Wrench, MousePointer2, LayoutTemplate, GitBranch, TerminalSquare, Play, Settings, Eraser, Crosshair, ChevronRight, ChevronLeft, Github } from 'lucide-react';
 
 const CANVAS_DICT = {
     en: {
@@ -27,6 +27,7 @@ const CANVAS_DICT = {
         addScreen: "Add Screen", addDecision: "Add Decision", addTerminal: "Add Terminal",
         genBrief: "Generate from Brief", loadAuth: "Load Example (Auth)", loadBroken: "Load Broken Demo",
         tools: "Tools", laserMode: "Laser Pointer",
+        github: "View on GitHub",
         exportJson: "Export JSON", exportPng: "Export PNG", resetCanvas: "Reset Canvas"
     },
     es: {
@@ -35,6 +36,7 @@ const CANVAS_DICT = {
         addScreen: "Añadir Pantalla", addDecision: "Añadir Decisión", addTerminal: "Añadir Terminal",
         genBrief: "Generar desde Brief", loadAuth: "Ejemplo de Autenticación", loadBroken: "Demo Rota",
         tools: "Herramientas", laserMode: "Puntero Láser",
+        github: "Ver en GitHub",
         exportJson: "Exportar JSON", exportPng: "Exportar PNG", resetCanvas: "Vaciar Todo"
     },
     fr: {
@@ -43,6 +45,7 @@ const CANVAS_DICT = {
         addScreen: "Ajouter Écran", addDecision: "Ajouter Décision", addTerminal: "Ajouter Terminal",
         genBrief: "Générer via Brief", loadAuth: "Exemple (Auth)", loadBroken: "Démo Cassée",
         tools: "Outils", laserMode: "Pointeur Laser",
+        github: "Voir sur GitHub",
         exportJson: "Exporter JSON", exportPng: "Exporter PNG", resetCanvas: "Réinitialiser"
     }
 };
@@ -401,6 +404,10 @@ export default function CanvasPage() {
                             <button onClick={() => setIsBuilderOpen(true)} className="w-full text-left px-4 py-2.5 text-sm text-indigo-300 hover:bg-slate-800 hover:text-indigo-200 transition flex items-center gap-2">
                                 <Sparkles size={14} /> Generate from Brief
                             </button>
+                            <div className="h-px bg-slate-800 my-1" />
+                            <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="w-full text-left px-4 py-2.5 text-sm text-slate-400 hover:bg-slate-800 hover:text-white transition flex items-center gap-2">
+                                <Github size={14} /> {CANVAS_DICT[lang].github}
+                            </a>
                             <div className="h-px bg-slate-800 my-1" />
                             <button onClick={handleExportPng} className="w-full text-left px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">
                                 {CANVAS_DICT[lang].exportPng}

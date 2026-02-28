@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, GitBranch, ShieldAlert, Sparkles, Zap, Lock, RefreshCw, Download, Brain, ChevronDown } from 'lucide-react';
+import { ArrowRight, CheckCircle2, GitBranch, ShieldAlert, Sparkles, Zap, Lock, RefreshCw, Download, Brain, ChevronDown, Github } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { LanguageSelector, Lang } from '@/components/LanguageSelector';
 
@@ -497,6 +497,9 @@ export default function Home() {
           <a href="#how-it-works" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navHow}</a>
           <Link href="/docs" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navDocs}</Link>
         </div>
+        <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl shadow-xl transition-all" title="View Source on GitHub">
+          <Github size={20} />
+        </a>
         <LanguageSelector lang={lang} setLang={setLang} />
         <Link href="/canvas" className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white text-sm font-semibold rounded-xl shadow-xl shadow-indigo-900/30 transition-all whitespace-nowrap">
           {t.navCanvas}

@@ -17,7 +17,8 @@ import {
     TerminalSquare,
     Zap,
     Download,
-    Cpu
+    Cpu,
+    Github
 } from 'lucide-react';
 import { LanguageSelector, Lang } from '@/components/LanguageSelector';
 
@@ -545,6 +546,9 @@ export default function DocsPage() {
                     </nav>
                 </div>
                 <div className="flex items-center gap-3">
+                    <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-white transition-colors" title="View Source on GitHub">
+                        <Github size={20} />
+                    </a>
                     <LanguageSelector lang={lang} setLang={setLang} />
                     <Link href="/canvas" className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg transition-all shadow-lg shadow-indigo-900/40">
                         {t.btnCanvas}
