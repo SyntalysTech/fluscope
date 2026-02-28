@@ -113,7 +113,7 @@ const CommonNodeWrapper = ({ data, id, selected, isConnectable, shapeClass, inne
                     {isEditing ? (
                         <input
                             autoFocus
-                            className="bg-transparent border-b border-indigo-400 outline-none text-center w-[80%] focus:ring-0 px-1 py-0.5 text-[11px] m-0 text-white"
+                            className="bg-transparent border-b border-indigo-400 outline-none text-center w-[80%] focus:ring-0 px-1 py-0.5 text-base m-0 text-white"
                             value={label}
                             onChange={(e) => setLabel(e.target.value)}
                             onBlur={handleBlur}
@@ -151,7 +151,7 @@ const CommonNodeWrapper = ({ data, id, selected, isConnectable, shapeClass, inne
                 {isEditing ? (
                     <input
                         autoFocus
-                        className="bg-transparent border-b border-indigo-400 outline-none text-center w-[80%] focus:ring-0 px-1 py-0.5 text-sm m-0 text-white"
+                        className="bg-transparent border-b border-indigo-400 outline-none text-center w-[80%] focus:ring-0 px-1 py-0.5 text-base m-0 text-white"
                         value={label}
                         onChange={(e) => setLabel(e.target.value)}
                         onBlur={handleBlur}

@@ -381,7 +381,7 @@ export default function CanvasPage() {
                         type="text"
                         value={flowTitle}
                         onChange={e => setFlowTitle(e.target.value)}
-                        className="w-full bg-[#0F172A]/70 backdrop-blur-md border border-slate-700/50 hover:border-slate-600 focus:border-indigo-500/60 text-slate-300 placeholder-slate-600 text-sm font-medium text-center px-4 py-2 rounded-xl shadow-xl outline-none transition-all focus:ring-1 focus:ring-indigo-500/40"
+                        className="w-full bg-[#0F172A]/70 backdrop-blur-md border border-slate-700/50 hover:border-slate-600 focus:border-indigo-500/60 text-slate-300 placeholder-slate-600 sm:text-sm text-base font-medium text-center px-4 py-2 rounded-xl shadow-xl outline-none transition-all focus:ring-1 focus:ring-indigo-500/40"
                         placeholder="Untitled Flow"
                         spellCheck={false}
                     />

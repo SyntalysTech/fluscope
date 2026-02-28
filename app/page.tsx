@@ -314,7 +314,8 @@ function AnimatedFlowDemo() {
   const nodeMap = Object.fromEntries(DEMO_NODES.map(n => [n.id, n]));
 
   return (
-    <div className="relative w-full rounded-2xl overflow-hidden bg-[#0d1424] border border-slate-800 shadow-2xl" style={{ height: 580 }}>
+  return (
+    <div className="relative w-full rounded-2xl overflow-hidden bg-[#0d1424] border border-slate-800 shadow-2xl h-[400px] sm:h-[580px]">
       {/* Dot grid background */}
       <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -427,25 +428,25 @@ function AnimatedFlowDemo() {
       </svg>
 
       {/* Audit Overlay Panel */}
-      <div className="absolute top-4 right-4 w-56 bg-[#0F172A]/95 backdrop-blur-md border border-slate-700 rounded-xl shadow-xl p-3 flex flex-col gap-2">
-        <div className="flex items-center gap-2 mb-1">
-          <div className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-400">Live Audit</span>
-          <span className="ml-auto text-[10px] text-slate-500 font-mono">72/100</span>
+      <div className="absolute top-2 right-2 sm:top-4 sm:right-4 w-40 sm:w-56 bg-[#0F172A]/90 sm:bg-[#0F172A]/95 backdrop-blur-md border border-slate-700 rounded-xl shadow-xl p-2 sm:p-3 flex flex-col gap-1.5 sm:gap-2 z-20">
+        <div className="flex items-center gap-2 mb-0.5 sm:mb-1">
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-indigo-400 animate-pulse" />
+          <span className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-indigo-400">Live Audit</span>
+          <span className="ml-auto text-[8px] sm:text-[10px] text-slate-500 font-mono">72/100</span>
         </div>
         {DEMO_ISSUES.map((issue, i) => {
           const isActive = activeIssue === issue.nodeId;
           return (
-            <div key={i} className={`flex items-center gap-2 p-1.5 rounded-lg transition-all duration-300 ${isActive ? 'bg-slate-800 border border-slate-700' : 'opacity-40'}`}>
-              <span className="text-sm">{issue.icon}</span>
-              <span className="text-[11px] text-slate-300 font-medium leading-tight">{issue.label}</span>
+            <div key={i} className={`flex items-center gap-1.5 sm:gap-2 p-1 sm:p-1.5 rounded-lg transition-all duration-300 ${isActive ? 'bg-slate-800 border border-slate-700' : 'opacity-40'}`}>
+              <span className="text-xs sm:text-sm">{issue.icon}</span>
+              <span className="text-[9px] sm:text-[11px] text-slate-300 font-medium leading-tight">{issue.label}</span>
             </div>
           );
         })}
 
-        <div className="mt-1 pt-2 border-t border-slate-800 flex items-center gap-1.5">
+        <div className="mt-0.5 sm:mt-1 pt-1.5 sm:pt-2 border-t border-slate-800 flex items-center gap-1.5">
           <Sparkles size={10} className="text-indigo-400" />
-          <span className="text-[10px] text-indigo-400 font-semibold">AI Confidence: High</span>
+          <span className="text-[8px] sm:text-[10px] text-indigo-400 font-semibold">AI Confidence: High</span>
         </div>
       </div>
     </div>
