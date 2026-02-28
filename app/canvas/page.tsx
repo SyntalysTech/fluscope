@@ -362,7 +362,7 @@ export default function CanvasPage() {
     return (
         <div className="flex h-screen w-full bg-[#0F172A] relative overflow-hidden">
             {/* Unified Canvas Header */}
-            <header className={`fixed top-0 left-0 w-full h-16 sm:h-20 px-4 sm:px-6 z-[60] flex items-center justify-between gap-3 sm:gap-4 transition-opacity duration-300 ${drawModeEnabled ? 'opacity-20 pointer-events-none' : 'opacity-100'}`}>
+            <header className={`fixed top-0 left-0 w-full h-16 sm:h-20 px-4 sm:px-6 z-[60] flex items-center justify-between gap-3 sm:gap-4 transition-opacity duration-300 ${drawModeEnabled ? 'opacity-40' : 'opacity-100'}`}>
 
                 {/* Left: Logo & Templates */}
                 <div className="flex items-center gap-2 sm:gap-3">
@@ -476,7 +476,7 @@ export default function CanvasPage() {
             )}
 
             {/* Bottom Toolbar — Desktop */}
-            <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 p-1.5 bg-[#0F172A]/80 backdrop-blur-xl border border-slate-700/60 rounded-2xl shadow-2xl transition-all duration-300 hidden sm:flex ${drawModeEnabled ? 'opacity-20 pointer-events-none' : 'opacity-100'}`}>
+            <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 p-1.5 bg-[#0F172A]/80 backdrop-blur-xl border border-slate-700/60 rounded-2xl shadow-2xl transition-all duration-300 hidden sm:flex ${drawModeEnabled ? 'opacity-90' : 'opacity-100'}`}>
                 <button
                     onClick={() => setDrawModeEnabled(false)}
                     className={`p-2.5 rounded-lg transition-all flex items-center justify-center ${!drawModeEnabled ? 'bg-slate-700/80 text-white' : 'text-slate-500 hover:text-slate-300 hover:bg-slate-800/60'}`}
@@ -505,7 +505,7 @@ export default function CanvasPage() {
             </div>
 
             {/* Bottom Toolbar — Mobile */}
-            <div className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 p-1.5 bg-[#0F172A]/80 backdrop-blur-xl border border-slate-700/60 rounded-2xl shadow-2xl transition-all duration-300 sm:hidden ${drawModeEnabled ? 'opacity-20 pointer-events-none' : 'opacity-100'}`}>
+            <div className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 p-1.5 bg-[#0F172A]/80 backdrop-blur-xl border border-slate-700/60 rounded-2xl shadow-2xl transition-all duration-300 sm:hidden ${drawModeEnabled ? 'opacity-95' : 'opacity-100'}`}>
                 <button
                     onClick={() => setDrawModeEnabled(false)}
                     className={`p-2.5 rounded-lg transition-all flex items-center justify-center ${!drawModeEnabled ? 'bg-slate-700/80 text-white' : 'text-slate-500 hover:text-slate-300 hover:bg-slate-800/60'}`}
