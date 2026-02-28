@@ -539,33 +539,32 @@ export default function DocsPage() {
 
     return (
         <div className="min-h-screen bg-[#0F172A] flex flex-col font-sans">
-            {/* Header */}
-            <header className="fixed top-0 left-0 right-0 h-16 bg-[#0F172A]/80 backdrop-blur-xl border-b border-slate-800 z-50 flex items-center justify-between px-4 sm:px-6">
-                <div className="flex items-center gap-3 sm:gap-6">
+            {/* Unified Docs Header */}
+            <header className="fixed top-0 left-0 right-0 h-16 bg-[#0F172A]/80 backdrop-blur-xl border-b border-slate-800 z-50 flex items-center justify-between px-4 sm:px-6 gap-3">
+                <div className="flex items-center gap-2 sm:gap-6 overflow-hidden">
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="lg:hidden p-2 text-slate-400 hover:text-white transition-colors"
+                        className="lg:hidden p-2 text-slate-400 hover:text-white transition-colors shrink-0"
                     >
                         {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
-                    <Link href="/" className="flex items-center gap-2.5 group">
-                        <Image src="/logos/logo-isotope-1024x1024.png" alt="Logo" width={26} height={26} className="group-hover:rotate-[15deg] transition-transform duration-300" />
-                        <Image src="/logos/logo-horizontal-text-alone-1600x400.png" alt="Fluscope" width={85} height={20} className="object-contain opacity-90 group-hover:opacity-100 transition-opacity hidden xs:block" />
-                        <span className="text-white font-black text-[10px] uppercase tracking-[0.2em] px-2 py-1 bg-white/5 border border-white/10 rounded-lg ml-1 hidden sm:block backdrop-blur-md">Docs</span>
+                    <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+                        <Image src="/logos/logo-isotope-1024x1024.png" alt="Logo" width={24} height={24} className="sm:w-7 sm:h-7 group-hover:rotate-[15deg] transition-transform duration-300" />
+                        <Image src="/logos/logo-horizontal-text-alone-1600x400.png" alt="Fluscope" width={80} height={18} className="sm:w-[85px] sm:h-[20px] object-contain opacity-90 group-hover:opacity-100 transition-opacity hidden xs:block" />
                     </Link>
-                    <nav className="hidden md:flex items-center gap-1">
-                        <Link href="/" className="px-3 py-1 text-xs font-semibold text-slate-500 hover:text-slate-300">{t.navHome}</Link>
-                        <ChevronRight size={10} className="text-slate-700" />
-                        <span className="px-3 py-1 text-xs font-semibold text-indigo-400 bg-indigo-500/10 rounded-full border border-indigo-500/20">{t.navKb}</span>
+                    <nav className="hidden lg:flex items-center gap-1 shrink-0">
+                        <ChevronRight size={10} className="text-slate-700 mx-1" />
+                        <span className="px-3 py-1 text-[10px] font-bold text-indigo-400 bg-indigo-500/10 rounded-full border border-indigo-500/20 uppercase tracking-widest">Docs</span>
                     </nav>
                 </div>
-                <div className="flex items-center gap-2 sm:gap-3">
-                    <div className="hidden sm:flex items-center gap-2 sm:gap-3">
-                        <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-white transition-colors" title="GitHub">
-                            <Github size={20} />
+
+                <div className="flex items-center gap-1.5 sm:gap-3">
+                    <div className="hidden xl:flex items-center gap-2">
+                        <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-white transition-colors">
+                            <Github size={18} />
                         </a>
-                        <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-[#5865F2] transition-colors" title="Discord">
-                            <DiscordIcon size={20} />
+                        <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-[#5865F2] transition-colors">
+                            <DiscordIcon size={18} />
                         </a>
                     </div>
                     <LanguageSelector lang={lang} setLang={setLang} />

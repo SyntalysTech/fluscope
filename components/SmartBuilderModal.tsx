@@ -90,8 +90,8 @@ export function SmartBuilderModal({ isOpen, onClose, onApplyFlow, lang }: SmartB
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0F172A]/80 backdrop-blur-sm p-4">
-            <div className="w-full max-w-lg bg-[#1E293B] border border-slate-700/60 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-                <div className="flex items-center justify-between p-4 border-b border-slate-700/50 bg-[#0F172A]/30">
+            <div className="w-full max-w-lg bg-[#1E293B] border border-slate-700/60 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200 max-h-[90vh]">
+                <div className="shrink-0 flex items-center justify-between p-4 border-b border-slate-700/50 bg-[#0F172A]/30">
                     <div className="flex items-center gap-2 text-slate-200 font-bold">
                         <Sparkles size={18} className="text-indigo-400" />
                         AI Flow Assistant
@@ -110,7 +110,7 @@ export function SmartBuilderModal({ isOpen, onClose, onApplyFlow, lang }: SmartB
                     </button>
                 </div>
 
-                <div className="p-6">
+                <div className="p-6 overflow-y-auto">
                     {mode === 'brief' ? (
                         <div className="space-y-4">
                             <div>

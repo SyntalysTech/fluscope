@@ -483,34 +483,36 @@ export default function Home() {
         }
       `}</style>
 
-      {/* Floating Nav — Left Logo */}
-      <div className="fixed top-6 left-6 z-50">
-        <Link href="/" className="flex items-center gap-3 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 px-4 py-2 rounded-xl shadow-xl transition-all group">
-          <Image src="/logos/logo-isotope-1024x1024.png" alt="Fluscope Icon" width={28} height={28} className="object-contain group-hover:rotate-[15deg] transition-transform duration-300" />
-          <Image src="/logos/logo-horizontal-text-alone-1600x400.png" alt="Fluscope" width={90} height={22} className="hidden sm:block object-contain" />
+      {/* Unified Floating Header */}
+      <header className="fixed top-0 left-0 w-full p-4 sm:p-6 z-50 flex items-center justify-between gap-4">
+        {/* Left Side: Logo */}
+        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 px-3 py-2 sm:px-4 rounded-xl shadow-xl transition-all group shrink-0">
+          <Image src="/logos/logo-isotope-1024x1024.png" alt="Fluscope Icon" width={24} height={24} className="sm:w-7 sm:h-7 object-contain group-hover:rotate-[15deg] transition-transform duration-300" />
+          <Image src="/logos/logo-horizontal-text-alone-1600x400.png" alt="Fluscope" width={80} height={20} className="sm:w-[90px] sm:h-[22px] hidden xs:block object-contain" />
         </Link>
-      </div>
 
-      {/* Floating Nav — Right Actions */}
-      <div className="fixed top-5 right-6 z-50 flex items-center gap-1.5 sm:gap-2">
-        <div className="hidden lg:flex items-center gap-1 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 px-2 py-1.5 rounded-xl shadow-xl">
-          <a href="#features" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navFeatures}</a>
-          <a href="#how-it-works" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navHow}</a>
-          <Link href="/docs" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navDocs}</Link>
+        {/* Right Side: Actions */}
+        <div className="flex items-center gap-1.5 sm:gap-2 overflow-hidden">
+          <div className="hidden lg:flex items-center gap-1 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 px-2 py-1.5 rounded-xl shadow-xl">
+            <a href="#features" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navFeatures}</a>
+            <a href="#how-it-works" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navHow}</a>
+            <Link href="/docs" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navDocs}</Link>
+          </div>
+
+          <div className="flex items-center gap-1 sm:gap-2">
+            <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl shadow-xl transition-all hidden xs:flex" title="GitHub">
+              <Github size={18} className="sm:w-5 sm:h-5" />
+            </a>
+            <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-[#5865F2] rounded-xl shadow-xl transition-all hidden xs:flex" title="Discord">
+              <DiscordIcon size={18} className="sm:w-5 sm:h-5" />
+            </a>
+            <LanguageSelector lang={lang} setLang={setLang} />
+            <Link href="/canvas" className="px-3 sm:px-4 py-2 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white text-[11px] sm:text-sm font-semibold rounded-xl shadow-xl shadow-indigo-900/30 transition-all whitespace-nowrap">
+              {t.navCanvas}
+            </Link>
+          </div>
         </div>
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl shadow-xl transition-all" title="GitHub">
-            <Github size={18} className="sm:w-5 sm:h-5" />
-          </a>
-          <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-[#5865F2] rounded-xl shadow-xl transition-all" title="Discord">
-            <DiscordIcon size={18} className="sm:w-5 sm:h-5" />
-          </a>
-          <LanguageSelector lang={lang} setLang={setLang} />
-          <Link href="/canvas" className="px-3 sm:px-4 py-2 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white text-xs sm:text-sm font-semibold rounded-xl shadow-xl shadow-indigo-900/30 transition-all whitespace-nowrap">
-            {t.navCanvas}
-          </Link>
-        </div>
-      </div>
+      </header>
 
       <main className="flex-1 flex flex-col items-center pt-24">
 

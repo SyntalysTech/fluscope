@@ -361,97 +361,99 @@ export default function CanvasPage() {
 
     return (
         <div className="flex h-screen w-full bg-[#0F172A] relative overflow-hidden">
-            {/* Top Toolbar */}
-            <div className={`fixed top-4 sm:top-6 left-4 sm:left-6 z-50 flex items-center gap-2 sm:gap-3 transition-opacity duration-300 ${drawModeEnabled ? 'opacity-20 pointer-events-none' : 'opacity-100'}`}>
-                <Link href="/" className="flex items-center gap-2 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl shadow-xl transition-all group">
-                    <Image src="/logos/logo-isotope-1024x1024.png" alt="Logo" width={24} height={24} className="object-contain group-hover:rotate-[15deg] transition-transform duration-300" />
-                    <Image src="/logos/logo-horizontal-text-alone-1600x400.png" alt="Fluscope" width={80} height={20} className="hidden xs:block object-contain" />
-                </Link>
+            {/* Unified Canvas Header */}
+            <header className={`fixed top-0 left-0 w-full h-16 sm:h-20 px-4 sm:px-6 z-[60] flex items-center justify-between gap-3 sm:gap-4 transition-opacity duration-300 ${drawModeEnabled ? 'opacity-20 pointer-events-none' : 'opacity-100'}`}>
 
-                <div className="h-8 w-px bg-slate-800/50 hidden sm:block" />
-
-                <TemplateSelector lang={lang} onSelect={handleLoadTemplate} dict={CANVAS_DICT[lang]} />
-            </div>
-
-            {/* Floating Top Center — Flow Title */}
-            <div className="absolute top-6 left-1/2 -translate-x-1/2 z-[55] flex items-center">
-                <input
-                    type="text"
-                    value={flowTitle}
-                    onChange={e => setFlowTitle(e.target.value)}
-                    className="bg-[#0F172A]/70 backdrop-blur-md border border-slate-700/50 hover:border-slate-600 focus:border-indigo-500/60 text-slate-300 placeholder-slate-600 text-sm font-medium text-center px-4 py-2 rounded-xl shadow-xl outline-none transition-all w-52 focus:w-64"
-                    placeholder="Untitled Flow"
-                    spellCheck={false}
-                />
-            </div>
-
-            <div className={`absolute top-4 sm:top-6 right-4 sm:right-6 z-[60] flex items-center gap-2 sm:gap-3 transition-all duration-300 ${isAuditPanelOpen && !window.matchMedia('(max-width: 1024px)').matches ? 'mr-[320px]' : ''}`}>
-
-                <div className="relative group">
-                    <button className="bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-300 px-3 py-2 sm:py-2.5 rounded-xl shadow-xl flex items-center gap-2 transition-all">
-                        <Settings size={18} />
-                    </button>
-                    {/* Settings Dropdown */}
-                    <div className="absolute top-full right-0 mt-3 w-48 sm:w-56 bg-[#0F172A]/95 backdrop-blur-xl border border-slate-700 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
-                        <div className="py-2">
-                            {/* Language picker */}
-                            <div className="px-4 py-2 flex items-center justify-between">
-                                <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Lang</span>
-                                <div className="flex items-center gap-1">
-                                    {(['en', 'es', 'fr'] as const).map(l => (
-                                        <button
-                                            key={l}
-                                            onClick={() => setLang(l)}
-                                            className={`px-1.5 py-0.5 rounded text-[10px] sm:text-xs font-bold transition-all ${lang === l ? 'bg-indigo-500/30 text-indigo-300 border border-indigo-500/40' : 'text-slate-500 hover:text-slate-300 hover:bg-slate-800'}`}
-                                        >
-                                            {l === 'en' ? 'GB' : l === 'es' ? 'ES' : 'FR'}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="h-px bg-slate-800 my-1" />
-                            <button onClick={() => setIsBuilderOpen(true)} className="w-full text-left px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-indigo-300 hover:bg-slate-800 hover:text-indigo-200 transition flex items-center gap-2">
-                                <Sparkles size={14} /> Brief
-                            </button>
-                            <div className="h-px bg-slate-800 my-1" />
-                            <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="w-full text-left px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-slate-400 hover:bg-slate-800 hover:text-white transition flex items-center gap-2">
-                                <Github size={14} /> GitHub
-                            </a>
-                            <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="w-full text-left px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-slate-400 hover:bg-slate-800 hover:text-[#5865F2] transition flex items-center gap-2">
-                                <DiscordIcon size={14} /> Discord
-                            </a>
-                            <div className="h-px bg-slate-800 my-1" />
-                            <button onClick={handleExportPng} className="w-full text-left px-4 py-2 text-xs sm:text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">
-                                {CANVAS_DICT[lang].exportPng}
-                            </button>
-                            <button onClick={handleExport} className="w-full text-left px-4 py-2 text-xs sm:text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">
-                                {CANVAS_DICT[lang].exportJson}
-                            </button>
-                            <div className="h-px bg-slate-800 my-1" />
-                            <button onClick={handleReset} className="w-full text-left px-4 py-2 text-xs sm:text-sm text-red-400 hover:bg-slate-800 font-medium transition flex items-center gap-2">
-                                <Eraser size={14} /> {CANVAS_DICT[lang].resetCanvas}
-                            </button>
-                        </div>
+                {/* Left: Logo & Templates */}
+                <div className="flex items-center gap-2 sm:gap-3">
+                    <Link href="/" className="flex items-center gap-2 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 p-2 sm:px-4 sm:py-2 rounded-xl shadow-xl transition-all group shrink-0">
+                        <Image src="/logos/logo-isotope-1024x1024.png" alt="Logo" width={24} height={24} className="sm:w-6 sm:h-6 object-contain group-hover:rotate-[15deg] transition-transform duration-300" />
+                        <Image src="/logos/logo-horizontal-text-alone-1600x400.png" alt="Fluscope" width={80} height={20} className="hidden lg:block object-contain" />
+                    </Link>
+                    <div className="hidden sm:block">
+                        <TemplateSelector lang={lang} onSelect={handleLoadTemplate} dict={CANVAS_DICT[lang]} />
                     </div>
                 </div>
 
-                <button
-                    onClick={handleRunAudit}
-                    disabled={isAnalyzingAI}
-                    className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl font-semibold text-xs sm:text-sm flex items-center gap-2 transition-all h-9 sm:h-10 ${isAnalyzingAI ? 'bg-slate-800 text-slate-400 border border-slate-700' : 'bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white shadow-lg'}`}
-                >
-                    {isAnalyzingAI ? <img src="/logos/logo-isotope-1024x1024.png" alt="" width={16} height={16} className="animate-spin opacity-80" /> : <Play size={16} />}
-                    <span className="hidden xs:block">{CANVAS_DICT[lang].runAudit}</span>
-                </button>
-                {/* Panel toggle — only opens/closes, does NOT re-audit */}
-                <button
-                    onClick={() => setIsAuditPanelOpen(v => !v)}
-                    title={isAuditPanelOpen ? 'Close panel' : 'Open audit panel'}
-                    className="w-10 h-10 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-slate-200 rounded-xl shadow-xl flex items-center justify-center transition-all"
-                >
-                    {isAuditPanelOpen ? <ChevronRight size={17} /> : <ChevronLeft size={17} />}
-                </button>
-            </div>
+                {/* Center: Title (Large Screens Only) */}
+                <div className="hidden lg:flex flex-1 justify-center max-w-[280px] xl:max-w-md">
+                    <input
+                        type="text"
+                        value={flowTitle}
+                        onChange={e => setFlowTitle(e.target.value)}
+                        className="w-full bg-[#0F172A]/70 backdrop-blur-md border border-slate-700/50 hover:border-slate-600 focus:border-indigo-500/60 text-slate-300 placeholder-slate-600 text-sm font-medium text-center px-4 py-2 rounded-xl shadow-xl outline-none transition-all focus:ring-1 focus:ring-indigo-500/40"
+                        placeholder="Untitled Flow"
+                        spellCheck={false}
+                    />
+                </div>
+
+                {/* Right: Actions */}
+                <div className={`flex items-center gap-2 sm:gap-3 transition-all duration-300 ${isAuditPanelOpen && !window.matchMedia('(max-width: 1024px)').matches ? 'mr-[320px]' : ''}`}>
+                    <div className="relative group">
+                        <button className="bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-300 px-3 py-2 sm:py-2.5 rounded-xl shadow-xl flex items-center gap-2 transition-all">
+                            <Settings size={18} />
+                        </button>
+                        {/* Settings Dropdown */}
+                        <div className="absolute top-full right-0 mt-3 w-48 sm:w-56 bg-[#0F172A]/95 backdrop-blur-xl border border-slate-700 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+                            <div className="py-2">
+                                <div className="px-4 py-2 flex items-center justify-between">
+                                    <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Lang</span>
+                                    <div className="flex items-center gap-1">
+                                        {(['en', 'es', 'fr'] as const).map(l => (
+                                            <button key={l} onClick={() => setLang(l)} className={`px-1.5 py-0.5 rounded text-[10px] sm:text-xs font-bold transition-all ${lang === l ? 'bg-indigo-500/30 text-indigo-300 border border-indigo-500/40' : 'text-slate-500 hover:text-slate-300 hover:bg-slate-800'}`}>
+                                                {l.toUpperCase()}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="h-px bg-slate-800 my-1" />
+                                <button onClick={() => setIsBuilderOpen(true)} className="w-full text-left px-4 py-2.5 text-xs sm:text-sm text-indigo-300 hover:bg-slate-800 hover:text-indigo-200 transition flex items-center gap-2">
+                                    <Sparkles size={14} /> Brief
+                                </button>
+                                <div className="h-px bg-slate-800 my-1 sm:hidden transition-all" />
+                                <div className="px-4 py-2 sm:hidden">
+                                    <TemplateSelector lang={lang} onSelect={handleLoadTemplate} dict={CANVAS_DICT[lang]} />
+                                </div>
+                                <div className="h-px bg-slate-800 my-1" />
+                                <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="w-full text-left px-4 py-2.5 text-xs sm:text-sm text-slate-400 hover:bg-slate-800 hover:text-white transition flex items-center gap-2">
+                                    <Github size={14} /> GitHub
+                                </a>
+                                <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="w-full text-left px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-slate-400 hover:bg-slate-800 hover:text-[#5865F2] transition flex items-center gap-2">
+                                    <DiscordIcon size={14} /> Discord
+                                </a>
+                                <div className="h-px bg-slate-800 my-1" />
+                                <button onClick={handleExportPng} className="w-full text-left px-4 py-2 text-xs sm:text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">
+                                    {CANVAS_DICT[lang].exportPng}
+                                </button>
+                                <button onClick={handleExport} className="w-full text-left px-4 py-2 text-xs sm:text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">
+                                    {CANVAS_DICT[lang].exportJson}
+                                </button>
+                                <div className="h-px bg-slate-800 my-1" />
+                                <button onClick={handleReset} className="w-full text-left px-4 py-2 text-xs sm:text-sm text-red-400 hover:bg-slate-800 font-medium transition flex items-center gap-2">
+                                    <Eraser size={14} /> {CANVAS_DICT[lang].resetCanvas}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button
+                        onClick={handleRunAudit}
+                        disabled={isAnalyzingAI}
+                        className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl font-semibold text-xs sm:text-sm flex items-center gap-2 transition-all h-9 sm:h-10 ${isAnalyzingAI ? 'bg-slate-800 text-slate-400 border border-slate-700' : 'bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white shadow-lg'}`}
+                    >
+                        {isAnalyzingAI ? <img src="/logos/logo-isotope-1024x1024.png" alt="" width={16} height={16} className="animate-spin opacity-80" /> : <Play size={16} />}
+                        <span className="hidden xs:block">{CANVAS_DICT[lang].runAudit}</span>
+                    </button>
+
+                    <button
+                        onClick={() => setIsAuditPanelOpen(v => !v)}
+                        title={isAuditPanelOpen ? 'Close panel' : 'Open audit panel'}
+                        className="w-9 h-9 sm:w-10 sm:h-10 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-slate-200 rounded-xl shadow-xl flex items-center justify-center transition-all"
+                    >
+                        {isAuditPanelOpen ? <ChevronRight size={17} /> : <ChevronLeft size={17} />}
+                    </button>
+                </div>
+            </header>
 
             <input
                 type="file"

@@ -484,6 +484,11 @@ function CanvasInner({
                     .react-flow__edge:hover .react-flow__edge-path {
                         stroke: #94a3b8;
                     }
+                    @media (max-width: 640px) {
+                        .react-flow__controls, .react-flow__minimap {
+                            display: none !important;
+                        }
+                    }
                     `}
                 </style>
                 <Controls showInteractive={false} className="bg-[#1E293B] border-slate-700 !fill-slate-300 [&>button]:border-slate-700" />
