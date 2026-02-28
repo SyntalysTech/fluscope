@@ -621,6 +621,10 @@ export default function DocsPage() {
                                 <span className="text-slate-500 text-xs font-medium">{t.footerText}</span>
                             </div>
                             <div className="flex flex-wrap justify-center items-center gap-4 text-[10px] text-slate-600 font-bold uppercase tracking-widest">
+                                <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="hover:text-slate-400 transition-colors normal-case" title="GitHub">
+                                    <Github size={14} />
+                                </a>
+                                <span className="text-slate-800 text-base">·</span>
                                 {t.footerTags.map((tag, i) => (
                                     <span key={i} className="flex items-center gap-4">
                                         <span>{tag}</span>

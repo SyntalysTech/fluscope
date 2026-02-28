@@ -693,10 +693,14 @@ export default function Home() {
             <span className="text-slate-500 text-sm">{t.footerText}</span>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-5 text-xs text-slate-600">
+            <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="hover:text-slate-400 transition-colors" title="GitHub">
+              <Github size={16} />
+            </a>
+            <span className="text-slate-800">·</span>
             {t.footerTags.map((tag, i) => (
               <span key={i} className="flex items-center gap-3 sm:gap-5">
                 <span>{tag}</span>
-                {i < t.footerTags.length - 1 && <span>·</span>}
+                {i < t.footerTags.length - 1 && <span className="text-slate-800">·</span>}
               </span>
             ))}
           </div>
