@@ -492,7 +492,7 @@ export default function Home() {
         </Link>
 
         {/* Right Side: Actions */}
-        <div className="flex items-center gap-1.5 sm:gap-2 overflow-hidden">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <div className="hidden lg:flex items-center gap-1 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 px-2 py-1.5 rounded-xl shadow-xl">
             <a href="#features" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navFeatures}</a>
             <a href="#how-it-works" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navHow}</a>
