@@ -19,7 +19,7 @@ import { TemplateSelector } from '@/components/TemplateSelector';
 import { getLayoutedElements } from '@/lib/autoLayout';
 import { SmartBuilderModal } from '@/components/SmartBuilderModal';
 import { DiscordIcon } from '@/components/DiscordIcon';
-import { Sparkles, Activity, Wrench, MousePointer2, LayoutTemplate, GitBranch, TerminalSquare, Play, Settings, Eraser, Crosshair, ChevronRight, ChevronLeft, Github, MessageCircle } from 'lucide-react';
+import { Download, Sparkles, Activity, Wrench, MousePointer2, LayoutTemplate, GitBranch, TerminalSquare, Play, Settings, Eraser, Crosshair, ChevronRight, ChevronLeft, Github, MessageCircle, X } from 'lucide-react';
 
 const CANVAS_DICT = {
     en: {
@@ -361,12 +361,16 @@ export default function CanvasPage() {
 
     return (
         <div className="flex h-screen w-full bg-[#0F172A] relative overflow-hidden">
-            {/* Floating Top Left Logo */}
-            <div className="absolute top-6 left-6 z-[60] flex items-center">
-                <Link href="/" className="flex items-center gap-3 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 px-4 py-2 rounded-xl shadow-xl transition-all group">
-                    <Image src="/logos/logo-isotope-1024x1024.png" alt="Fluscope Icon" width={28} height={28} className="object-contain group-hover:rotate-[15deg] transition-transform duration-300" />
-                    <Image src="/logos/logo-horizontal-text-alone-1600x400.png" alt="Fluscope" width={90} height={22} className="object-contain hidden sm:block" />
+            {/* Top Toolbar */}
+            <div className={`fixed top-4 sm:top-6 left-4 sm:left-6 z-50 flex items-center gap-2 sm:gap-3 transition-opacity duration-300 ${drawModeEnabled ? 'opacity-20 pointer-events-none' : 'opacity-100'}`}>
+                <Link href="/" className="flex items-center gap-2 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl shadow-xl transition-all group">
+                    <Image src="/logos/logo-isotope-1024x1024.png" alt="Logo" width={24} height={24} className="object-contain group-hover:rotate-[15deg] transition-transform duration-300" />
+                    <Image src="/logos/logo-horizontal-text-alone-1600x400.png" alt="Fluscope" width={80} height={20} className="hidden xs:block object-contain" />
                 </Link>
+
+                <div className="h-8 w-px bg-slate-800/50 hidden sm:block" />
+
+                <TemplateSelector lang={lang} onSelect={handleLoadTemplate} dict={CANVAS_DICT[lang]} />
             </div>
 
             {/* Floating Top Center — Flow Title */}
@@ -381,59 +385,50 @@ export default function CanvasPage() {
                 />
             </div>
 
-            <div className={`absolute top-6 right-6 z-[60] flex items-center gap-3 transition-all duration-300 ${isAuditPanelOpen ? 'mr-[320px]' : ''}`}>
+            <div className={`absolute top-4 sm:top-6 right-4 sm:right-6 z-[60] flex items-center gap-2 sm:gap-3 transition-all duration-300 ${isAuditPanelOpen && !window.matchMedia('(max-width: 1024px)').matches ? 'mr-[320px]' : ''}`}>
 
                 <div className="relative group">
-                    <button className="bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-300 px-3 py-2.5 rounded-xl shadow-xl flex items-center gap-2 transition-all">
+                    <button className="bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-300 px-3 py-2 sm:py-2.5 rounded-xl shadow-xl flex items-center gap-2 transition-all">
                         <Settings size={18} />
                     </button>
-                    <div className="absolute top-full right-0 mt-3 w-56 bg-[#0F172A]/95 backdrop-blur-xl border border-slate-700 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+                    {/* Settings Dropdown */}
+                    <div className="absolute top-full right-0 mt-3 w-48 sm:w-56 bg-[#0F172A]/95 backdrop-blur-xl border border-slate-700 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
                         <div className="py-2">
                             {/* Language picker */}
                             <div className="px-4 py-2 flex items-center justify-between">
-                                <span className="text-xs text-slate-500 uppercase font-bold tracking-wider">Language</span>
+                                <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Lang</span>
                                 <div className="flex items-center gap-1">
                                     {(['en', 'es', 'fr'] as const).map(l => (
                                         <button
                                             key={l}
                                             onClick={() => setLang(l)}
-                                            className={`px-1.5 py-0.5 rounded text-sm font-bold transition-all ${lang === l ? 'bg-indigo-500/30 text-indigo-300 border border-indigo-500/40' : 'text-slate-500 hover:text-slate-300 hover:bg-slate-800'}`}
+                                            className={`px-1.5 py-0.5 rounded text-[10px] sm:text-xs font-bold transition-all ${lang === l ? 'bg-indigo-500/30 text-indigo-300 border border-indigo-500/40' : 'text-slate-500 hover:text-slate-300 hover:bg-slate-800'}`}
                                         >
-                                            {l === 'en' ? '🇬🇧' : l === 'es' ? '🇪🇸' : '🇫🇷'}
+                                            {l === 'en' ? 'GB' : l === 'es' ? 'ES' : 'FR'}
                                         </button>
                                     ))}
                                 </div>
                             </div>
                             <div className="h-px bg-slate-800 my-1" />
-                            <button onClick={() => setIsBuilderOpen(true)} className="w-full text-left px-4 py-2.5 text-sm text-indigo-300 hover:bg-slate-800 hover:text-indigo-200 transition flex items-center gap-2">
-                                <Sparkles size={14} /> Generate from Brief
+                            <button onClick={() => setIsBuilderOpen(true)} className="w-full text-left px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-indigo-300 hover:bg-slate-800 hover:text-indigo-200 transition flex items-center gap-2">
+                                <Sparkles size={14} /> Brief
                             </button>
                             <div className="h-px bg-slate-800 my-1" />
-                            <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="w-full text-left px-4 py-2.5 text-sm text-slate-400 hover:bg-slate-800 hover:text-white transition flex items-center gap-2">
-                                <Github size={14} /> {CANVAS_DICT[lang].github}
+                            <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="w-full text-left px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-slate-400 hover:bg-slate-800 hover:text-white transition flex items-center gap-2">
+                                <Github size={14} /> GitHub
                             </a>
-                            <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="w-full text-left px-4 py-2.5 text-sm text-slate-400 hover:bg-slate-800 hover:text-[#5865F2] transition flex items-center gap-2">
-                                <DiscordIcon size={14} /> {CANVAS_DICT[lang].discord}
+                            <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="w-full text-left px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-slate-400 hover:bg-slate-800 hover:text-[#5865F2] transition flex items-center gap-2">
+                                <DiscordIcon size={14} /> Discord
                             </a>
                             <div className="h-px bg-slate-800 my-1" />
-                            <button onClick={handleExportPng} className="w-full text-left px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">
+                            <button onClick={handleExportPng} className="w-full text-left px-4 py-2 text-xs sm:text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">
                                 {CANVAS_DICT[lang].exportPng}
                             </button>
-                            <button onClick={handleExport} className="w-full text-left px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">
+                            <button onClick={handleExport} className="w-full text-left px-4 py-2 text-xs sm:text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">
                                 {CANVAS_DICT[lang].exportJson}
                             </button>
-                            <button onClick={handleImportClick} className="w-full text-left px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">
-                                Load Custom JSON
-                            </button>
                             <div className="h-px bg-slate-800 my-1" />
-                            <button onClick={() => handleLoadTemplate('auth')} className="w-full text-left px-4 py-2 text-sm text-indigo-300 hover:bg-slate-800 hover:text-indigo-200 transition">
-                                {CANVAS_DICT[lang].loadAuth}
-                            </button>
-                            <button onClick={() => handleLoadTemplate('broken')} className="w-full text-left px-4 py-2 text-sm text-amber-300 hover:bg-slate-800 hover:text-amber-200 transition">
-                                {CANVAS_DICT[lang].loadBroken}
-                            </button>
-                            <div className="h-px bg-slate-800 my-1" />
-                            <button onClick={handleReset} className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-slate-800 font-medium transition flex items-center gap-2">
+                            <button onClick={handleReset} className="w-full text-left px-4 py-2 text-xs sm:text-sm text-red-400 hover:bg-slate-800 font-medium transition flex items-center gap-2">
                                 <Eraser size={14} /> {CANVAS_DICT[lang].resetCanvas}
                             </button>
                         </div>
@@ -443,10 +438,10 @@ export default function CanvasPage() {
                 <button
                     onClick={handleRunAudit}
                     disabled={isAnalyzingAI}
-                    className={`px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all h-10 ${isAnalyzingAI ? 'bg-slate-800 text-slate-400 border border-slate-700' : 'bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white shadow-lg'}`}
+                    className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl font-semibold text-xs sm:text-sm flex items-center gap-2 transition-all h-9 sm:h-10 ${isAnalyzingAI ? 'bg-slate-800 text-slate-400 border border-slate-700' : 'bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white shadow-lg'}`}
                 >
                     {isAnalyzingAI ? <img src="/logos/logo-isotope-1024x1024.png" alt="" width={16} height={16} className="animate-spin opacity-80" /> : <Play size={16} />}
-                    <span className="hidden md:block">{CANVAS_DICT[lang].runAudit}</span>
+                    <span className="hidden xs:block">{CANVAS_DICT[lang].runAudit}</span>
                 </button>
                 {/* Panel toggle — only opens/closes, does NOT re-audit */}
                 <button
@@ -478,8 +473,8 @@ export default function CanvasPage() {
                 </div>
             )}
 
-            {/* Bottom Toolbar */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[50] flex items-center bg-[#0F172A]/85 backdrop-blur-md border border-slate-700/60 rounded-xl shadow-2xl px-2 py-1.5 gap-0.5">
+            {/* Bottom Toolbar — Desktop */}
+            <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 p-1.5 bg-[#0F172A]/80 backdrop-blur-xl border border-slate-700/60 rounded-2xl shadow-2xl transition-all duration-300 hidden sm:flex ${drawModeEnabled ? 'opacity-20 pointer-events-none' : 'opacity-100'}`}>
                 <button
                     onClick={() => setDrawModeEnabled(false)}
                     className={`p-2.5 rounded-lg transition-all flex items-center justify-center ${!drawModeEnabled ? 'bg-slate-700/80 text-white' : 'text-slate-500 hover:text-slate-300 hover:bg-slate-800/60'}`}
@@ -507,6 +502,28 @@ export default function CanvasPage() {
                 </button>
             </div>
 
+            {/* Bottom Toolbar — Mobile */}
+            <div className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 p-1.5 bg-[#0F172A]/80 backdrop-blur-xl border border-slate-700/60 rounded-2xl shadow-2xl transition-all duration-300 sm:hidden ${drawModeEnabled ? 'opacity-20 pointer-events-none' : 'opacity-100'}`}>
+                <button
+                    onClick={() => setDrawModeEnabled(false)}
+                    className={`p-2.5 rounded-lg transition-all flex items-center justify-center ${!drawModeEnabled ? 'bg-slate-700/80 text-white' : 'text-slate-500 hover:text-slate-300 hover:bg-slate-800/60'}`}
+                >
+                    <MousePointer2 size={17} />
+                </button>
+                <button onClick={() => { setDrawModeEnabled(false); handleAddNode('screenNode'); }} className="p-2 text-slate-500 hover:text-slate-200 hover:bg-slate-800/60 rounded-lg">
+                    <LayoutTemplate size={17} />
+                </button>
+                <button onClick={() => { setDrawModeEnabled(false); handleAddNode('decisionNode'); }} className="p-2 text-slate-500 hover:text-slate-200 hover:bg-slate-800/60 rounded-lg">
+                    <GitBranch size={17} />
+                </button>
+                <button
+                    onClick={() => setDrawModeEnabled(true)}
+                    className={`p-2.5 rounded-lg transition-all ${drawModeEnabled ? 'bg-indigo-500 text-white' : 'text-slate-500'}`}
+                >
+                    <Crosshair size={17} />
+                </button>
+            </div>
+
             {/* Canvas Area */}
             <div className="flex-1 relative z-10 border-r border-slate-800">
                 <Canvas
@@ -523,10 +540,32 @@ export default function CanvasPage() {
                 />
             </div>
 
-            {/* Right Audit Panel Collapsible Wrapper */}
-            <div className={`shrink-0 flex flex-col h-full bg-[#0F172A] border-l transition-all duration-300 ease-in-out ${isAuditPanelOpen ? 'w-[320px] opacity-100 border-slate-700/60' : 'w-0 opacity-0 overflow-hidden border-transparent'}`}>
-                <div className="w-[320px] h-full flex flex-col">
-                    <AuditPanel result={auditResult} onHighlightNodes={handleHighlightNodes} nodes={nodes} isAnalyzingAI={isAnalyzingAI} onAutoFix={handleAutoFix} isFixing={isFixing} lang={lang} onToggle={() => setIsAuditPanelOpen(false)} />
+            {/* Audit Panel Overlay */}
+            <div className={`fixed top-0 right-0 h-full w-full sm:w-[400px] bg-[#0F172A] border-l border-slate-800 z-[70] transform transition-transform duration-500 ease-in-out shadow-2xl ${isAuditPanelOpen ? 'translate-x-0' : 'translate-x-full shadow-none'}`}>
+                {/* Header for Panel */}
+                <div className="flex items-center justify-between p-4 border-b border-slate-800 sm:hidden">
+                    <div className="flex items-center gap-2 text-indigo-400 font-bold text-sm">
+                        <Activity size={18} />
+                        <span>Audit Panel</span>
+                    </div>
+                    <button
+                        onClick={() => setIsAuditPanelOpen(false)}
+                        className="p-2 text-slate-400 hover:text-white"
+                    >
+                        <X size={20} />
+                    </button>
+                </div>
+                <div className="h-full overflow-y-auto">
+                    <AuditPanel
+                        result={auditResult}
+                        onHighlightNodes={handleHighlightNodes}
+                        nodes={nodes}
+                        isAnalyzingAI={isAnalyzingAI}
+                        onAutoFix={handleAutoFix}
+                        isFixing={isFixing}
+                        lang={lang}
+                        onToggle={() => setIsAuditPanelOpen(false)}
+                    />
                 </div>
             </div>
 

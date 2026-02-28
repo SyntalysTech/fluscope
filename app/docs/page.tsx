@@ -19,7 +19,9 @@ import {
     Download,
     Cpu,
     Github,
-    MessageCircle
+    MessageCircle,
+    Menu,
+    X
 } from 'lucide-react';
 import { LanguageSelector, Lang } from '@/components/LanguageSelector';
 import { DiscordIcon } from '@/components/DiscordIcon';
@@ -397,8 +399,9 @@ const BuilderSandbox = () => {
 };
 
 export default function DocsPage() {
-    const [activeSection, setActiveSection] = useState('overview');
+    const [activeSection, setActiveSection] = useState('intro');
     const [lang, setLang] = useState<Lang>('en');
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const t = DICT[lang];
 
     const sections = [
@@ -537,12 +540,18 @@ export default function DocsPage() {
     return (
         <div className="min-h-screen bg-[#0F172A] flex flex-col font-sans">
             {/* Header */}
-            <header className="fixed top-0 left-0 right-0 h-16 bg-[#0F172A]/80 backdrop-blur-xl border-b border-slate-800 z-50 flex items-center justify-between px-6">
-                <div className="flex items-center gap-6">
+            <header className="fixed top-0 left-0 right-0 h-16 bg-[#0F172A]/80 backdrop-blur-xl border-b border-slate-800 z-50 flex items-center justify-between px-4 sm:px-6">
+                <div className="flex items-center gap-3 sm:gap-6">
+                    <button
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        className="lg:hidden p-2 text-slate-400 hover:text-white transition-colors"
+                    >
+                        {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                    </button>
                     <Link href="/" className="flex items-center gap-2.5 group">
                         <Image src="/logos/logo-isotope-1024x1024.png" alt="Logo" width={26} height={26} className="group-hover:rotate-[15deg] transition-transform duration-300" />
-                        <Image src="/logos/logo-horizontal-text-alone-1600x400.png" alt="Fluscope" width={85} height={20} className="object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
-                        <span className="text-white font-black text-[10px] uppercase tracking-[0.2em] px-2.5 py-1 bg-white/5 border border-white/10 rounded-lg ml-1 hidden sm:block backdrop-blur-md">Docs</span>
+                        <Image src="/logos/logo-horizontal-text-alone-1600x400.png" alt="Fluscope" width={85} height={20} className="object-contain opacity-90 group-hover:opacity-100 transition-opacity hidden xs:block" />
+                        <span className="text-white font-black text-[10px] uppercase tracking-[0.2em] px-2 py-1 bg-white/5 border border-white/10 rounded-lg ml-1 hidden sm:block backdrop-blur-md">Docs</span>
                     </Link>
                     <nav className="hidden md:flex items-center gap-1">
                         <Link href="/" className="px-3 py-1 text-xs font-semibold text-slate-500 hover:text-slate-300">{t.navHome}</Link>
@@ -550,29 +559,39 @@ export default function DocsPage() {
                         <span className="px-3 py-1 text-xs font-semibold text-indigo-400 bg-indigo-500/10 rounded-full border border-indigo-500/20">{t.navKb}</span>
                     </nav>
                 </div>
-                <div className="flex items-center gap-3">
-                    <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-white transition-colors" title="GitHub">
-                        <Github size={20} />
-                    </a>
-                    <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-[#5865F2] transition-colors" title="Discord">
-                        <DiscordIcon size={20} />
-                    </a>
+                <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="hidden sm:flex items-center gap-2 sm:gap-3">
+                        <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-white transition-colors" title="GitHub">
+                            <Github size={20} />
+                        </a>
+                        <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-[#5865F2] transition-colors" title="Discord">
+                            <DiscordIcon size={20} />
+                        </a>
+                    </div>
                     <LanguageSelector lang={lang} setLang={setLang} />
-                    <Link href="/canvas" className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg transition-all shadow-lg shadow-indigo-900/40">
+                    <Link href="/canvas" className="px-3 sm:px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] sm:text-xs font-bold rounded-lg transition-all shadow-lg shadow-indigo-900/40 whitespace-nowrap">
                         {t.btnCanvas}
                     </Link>
                 </div>
             </header>
 
-            <div className="flex flex-1 pt-16">
+            <div className="flex flex-1 pt-16 relative">
+                {/* Mobile Menu Overlay */}
+                {isMobileMenuOpen && (
+                    <div
+                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[45] lg:hidden"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                    />
+                )}
+
                 {/* Sidebar */}
-                <aside className="fixed left-0 top-16 bottom-0 w-64 bg-[#0F172A] border-r border-slate-800 p-6 overflow-y-auto hidden lg:block">
+                <aside className={`fixed lg:sticky top-16 bottom-0 w-64 bg-[#0F172A] border-r border-slate-800 p-6 overflow-y-auto z-[46] transform transition-transform duration-300 lg:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                     <div className="text-[10px] uppercase font-bold text-slate-500 tracking-[0.2em] mb-6">Introduction</div>
                     <nav className="space-y-1">
                         {sections.slice(0, 1).map(s => (
                             <button
                                 key={s.id}
-                                onClick={() => setActiveSection(s.id)}
+                                onClick={() => { setActiveSection(s.id); setIsMobileMenuOpen(false); }}
                                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${activeSection === s.id ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'}`}
                             >
                                 {s.icon} {s.title}
@@ -585,7 +604,7 @@ export default function DocsPage() {
                         {sections.slice(1).map(s => (
                             <button
                                 key={s.id}
-                                onClick={() => setActiveSection(s.id)}
+                                onClick={() => { setActiveSection(s.id); setIsMobileMenuOpen(false); }}
                                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${activeSection === s.id ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'}`}
                             >
                                 {s.icon} {s.title}
@@ -596,56 +615,43 @@ export default function DocsPage() {
                     <div className="mt-12 p-5 bg-gradient-to-br from-indigo-500/5 to-slate-800/20 border border-slate-700/40 rounded-2xl">
                         <h5 className="text-white text-xs font-bold mb-2">Need help?</h5>
                         <p className="text-slate-500 text-[11px] mb-3 leading-relaxed">Found a bug or have a feature request?</p>
-                        <a href="mailto:hello@fluscope.app" className="text-indigo-400 text-xs font-bold hover:underline">Support →</a>
+                        <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="text-indigo-400 text-xs font-bold hover:underline">Community Support →</a>
                     </div>
                 </aside>
 
                 {/* Main Content */}
-                <main className="flex-1 lg:ml-64 p-8 md:p-12 lg:p-20 max-w-5xl">
-                    {/* Mobile Nav */}
-                    <div className="lg:hidden mb-10 overflow-x-auto">
-                        <div className="flex gap-2 pb-2">
-                            {sections.map(s => (
-                                <button
-                                    key={s.id}
-                                    onClick={() => setActiveSection(s.id)}
-                                    className={`whitespace-nowrap flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${activeSection === s.id ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-900/20' : 'bg-slate-800 text-slate-400 border border-slate-700'}`}
-                                >
-                                    {s.title}
-                                </button>
-                            ))}
+                <main className="flex-1 w-full max-w-full overflow-hidden">
+                    <div className="max-w-[1200px] mx-auto p-4 sm:p-8 md:p-12 lg:p-20">
+                        <div className="min-h-[500px]">
+                            {renderContent()}
                         </div>
-                    </div>
 
-                    <div className="min-h-[500px]">
-                        {renderContent()}
+                        {/* Footer */}
+                        <footer className="mt-32 border-t border-slate-800 py-12">
+                            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+                                <div className="flex items-center gap-3">
+                                    <Image src="/logos/logo-isotope-1024x1024.png" alt="Fluscope Icon" width={22} height={22} className="opacity-50 grayscale" />
+                                    <span className="text-slate-500 text-xs font-medium">{t.footerText}</span>
+                                </div>
+                                <div className="flex flex-wrap justify-center items-center gap-4 text-[10px] text-slate-600 font-bold uppercase tracking-widest">
+                                    <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="hover:text-slate-400 transition-colors normal-case" title="GitHub">
+                                        <Github size={14} />
+                                    </a>
+                                    <span className="text-slate-800 text-base">·</span>
+                                    <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="hover:text-[#5865F2] transition-colors normal-case" title="Discord">
+                                        <DiscordIcon size={14} />
+                                    </a>
+                                    <span className="text-slate-800 text-base">·</span>
+                                    {t.footerTags.map((tag, i) => (
+                                        <span key={i} className="flex items-center gap-4">
+                                            <span>{tag}</span>
+                                            {i < t.footerTags.length - 1 && <span className="text-slate-800 text-base">·</span>}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </footer>
                     </div>
-
-                    {/* Footer */}
-                    <footer className="mt-32 border-t border-slate-800 py-12">
-                        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-                            <div className="flex items-center gap-3">
-                                <Image src="/logos/logo-isotope-1024x1024.png" alt="Fluscope Icon" width={22} height={22} className="opacity-50 grayscale" />
-                                <span className="text-slate-500 text-xs font-medium">{t.footerText}</span>
-                            </div>
-                            <div className="flex flex-wrap justify-center items-center gap-4 text-[10px] text-slate-600 font-bold uppercase tracking-widest">
-                                <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="hover:text-slate-400 transition-colors normal-case" title="GitHub">
-                                    <Github size={14} />
-                                </a>
-                                <span className="text-slate-800 text-base">·</span>
-                                <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="hover:text-[#5865F2] transition-colors normal-case" title="Discord">
-                                    <DiscordIcon size={14} />
-                                </a>
-                                <span className="text-slate-800 text-base">·</span>
-                                {t.footerTags.map((tag, i) => (
-                                    <span key={i} className="flex items-center gap-4">
-                                        <span>{tag}</span>
-                                        {i < t.footerTags.length - 1 && <span className="text-slate-800 text-base">·</span>}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </footer>
                 </main>
             </div>
         </div>

@@ -492,22 +492,24 @@ export default function Home() {
       </div>
 
       {/* Floating Nav — Right Actions */}
-      <div className="fixed top-5 right-6 z-50 flex items-center gap-2">
-        <div className="hidden md:flex items-center gap-1 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 px-2 py-1.5 rounded-xl shadow-xl">
+      <div className="fixed top-5 right-6 z-50 flex items-center gap-1.5 sm:gap-2">
+        <div className="hidden lg:flex items-center gap-1 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 px-2 py-1.5 rounded-xl shadow-xl">
           <a href="#features" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navFeatures}</a>
           <a href="#how-it-works" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navHow}</a>
           <Link href="/docs" className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-lg transition-all">{t.navDocs}</Link>
         </div>
-        <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl shadow-xl transition-all" title="GitHub">
-          <Github size={20} />
-        </a>
-        <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-[#5865F2] rounded-xl shadow-xl transition-all" title="Discord">
-          <DiscordIcon size={20} />
-        </a>
-        <LanguageSelector lang={lang} setLang={setLang} />
-        <Link href="/canvas" className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white text-sm font-semibold rounded-xl shadow-xl shadow-indigo-900/30 transition-all whitespace-nowrap">
-          {t.navCanvas}
-        </Link>
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl shadow-xl transition-all" title="GitHub">
+            <Github size={18} className="sm:w-5 sm:h-5" />
+          </a>
+          <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-[#5865F2] rounded-xl shadow-xl transition-all" title="Discord">
+            <DiscordIcon size={18} className="sm:w-5 sm:h-5" />
+          </a>
+          <LanguageSelector lang={lang} setLang={setLang} />
+          <Link href="/canvas" className="px-3 sm:px-4 py-2 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white text-xs sm:text-sm font-semibold rounded-xl shadow-xl shadow-indigo-900/30 transition-all whitespace-nowrap">
+            {t.navCanvas}
+          </Link>
+        </div>
       </div>
 
       <main className="flex-1 flex flex-col items-center pt-24">
@@ -520,9 +522,9 @@ export default function Home() {
               <Image src="/logos/logo-horizontal-text-alone-1600x400.png" alt="Fluscope" width={200} height={50} priority className="w-auto opacity-90" />
             </div>
 
-            <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6 max-w-3xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 max-w-3xl mx-auto">
               <span className="text-slate-100 block">Draw your product flow.</span>
-              <span className="hero-gtext block">Fluscope finds what's missing.</span>
+              <span className="hero-gtext block text-3xl sm:text-5xl md:text-6xl">Fluscope finds what's missing.</span>
             </h1>
 
             <p className="text-base md:text-lg text-slate-500 mb-10 max-w-xl mx-auto leading-relaxed">
@@ -569,9 +571,9 @@ export default function Home() {
             <p className="text-slate-500 max-w-lg mx-auto text-sm">Three focused tools. No switching context.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-5 mb-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
             {/* Pillar 1 */}
-            <div className="bg-slate-900/40 border border-slate-800 hover:border-slate-700 rounded-2xl p-7 transition-all">
+            <div className="bg-slate-900/40 border border-slate-800 hover:border-slate-700 rounded-2xl p-6 sm:p-7 transition-all">
               <div className="w-10 h-10 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center mb-5">
                 <GitBranch size={20} />
               </div>
@@ -580,7 +582,7 @@ export default function Home() {
             </div>
 
             {/* Pillar 2 */}
-            <div className="bg-slate-900/40 border border-slate-800 hover:border-slate-700 rounded-2xl p-7 transition-all">
+            <div className="bg-slate-900/40 border border-slate-800 hover:border-slate-700 rounded-2xl p-6 sm:p-7 transition-all">
               <div className="w-10 h-10 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center mb-5">
                 <ShieldAlert size={20} />
               </div>
@@ -589,7 +591,7 @@ export default function Home() {
             </div>
 
             {/* Pillar 3 */}
-            <div className="bg-slate-900/40 border border-slate-800 hover:border-slate-700 rounded-2xl p-7 transition-all">
+            <div className="bg-slate-900/40 border border-slate-800 hover:border-slate-700 rounded-2xl p-6 sm:p-7 transition-all sm:col-span-2 lg:col-span-1">
               <div className="w-10 h-10 bg-slate-600/30 text-slate-400 rounded-xl flex items-center justify-center mb-5">
                 <Zap size={20} />
               </div>
@@ -633,13 +635,13 @@ export default function Home() {
             <p className="text-slate-400">{t.howSubtitle}</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 relative">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 relative">
             {TRANSLATED_HOW[lang].map((s, i) => {
               const IconComp = ICONS_HOW[i];
               const clr = COLORS_HOW[i];
               const stepStr = '0' + (i + 1);
               return (
-                <div key={i} className="flex flex-col items-center text-center p-8 bg-slate-900/50 border border-slate-800 rounded-2xl">
+                <div key={i} className={`flex flex-col items-center text-center p-8 bg-slate-900/50 border border-slate-800 rounded-2xl ${i === 2 ? 'sm:col-span-2 lg:col-span-1' : ''}`}>
                   <div className={`w-14 h-14 ${clr.b} ${clr.c} rounded-2xl flex items-center justify-center mb-5`}>
                     <IconComp size={26} />
                   </div>
@@ -669,19 +671,19 @@ export default function Home() {
         </section >
 
         {/* ── CTA ────────────────────────────────────────────────── */}
-        < section className="w-full max-w-3xl mx-auto px-6 py-24 text-center" >
-          <div className="relative cta-gbox border border-indigo-500/20 rounded-3xl p-12 overflow-hidden">
+        <section className="w-full max-w-3xl mx-auto px-6 py-24 text-center">
+          <div className="relative cta-gbox border border-indigo-500/20 rounded-3xl p-8 sm:p-12 overflow-hidden">
             <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-64 h-64 bg-indigo-500 rounded-full blur-[120px] opacity-10 pointer-events-none" />
             <div className="flex justify-center mb-4">
               <Image src="/logos/logo-isotope-1024x1024.png" alt="Fluscope" width={48} height={48} className="rounded-xl opacity-80" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-100 mb-4">
-              {t.ctaTitle1}<br />{t.ctaTitle2}
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-100 mb-4">
+              {t.ctaTitle1}<br className="hidden sm:block" /> {t.ctaTitle2}
             </h2>
-            <p className="text-slate-400 mb-8 max-w-md mx-auto">
+            <p className="text-sm sm:text-base text-slate-400 mb-8 max-w-md mx-auto">
               {t.ctaSubtitle}
             </p>
-            <Link href="/canvas" className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl shadow-[0_0_40px_rgba(99,102,241,0.4)] hover:shadow-[0_0_50px_rgba(99,102,241,0.6)] transition-all hover:scale-[1.02] text-base">
+            <Link href="/canvas" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-4 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl shadow-[0_0_40px_rgba(99,102,241,0.4)] hover:shadow-[0_0_50px_rgba(99,102,241,0.6)] transition-all hover:scale-[1.02] text-sm sm:text-base">
               {t.ctaButton}
               <ArrowRight size={20} />
             </Link>
