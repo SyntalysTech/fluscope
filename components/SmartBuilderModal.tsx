@@ -119,7 +119,7 @@ export function SmartBuilderModal({ isOpen, onClose, onApplyFlow, lang }: SmartB
                                     value={briefText}
                                     onChange={(e) => setBriefText(e.target.value)}
                                     placeholder="e.g., A SaaS platform with a freemium signup, email verification, dashboard, and a stripe checkout for pro features..."
-                                    className="w-full h-32 bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-none transition-colors"
+                                    className="w-full h-32 bg-slate-900 border border-slate-700 rounded-lg p-3 text-base text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-none transition-colors"
                                 />
                             </div>
                             <button
