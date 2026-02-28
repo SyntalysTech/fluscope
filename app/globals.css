@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@import "@xyflow/react/dist/style.css";
+
+:root {
+  color-scheme: dark;
+  --color-background: #0F172A;
+  --color-foreground: #E2E8F0;
+  --color-accent: #6366F1;
+  --color-secondary: #94A3B8;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* React Flow custom overrides for dark theme */
+.react-flow__node {
+  background: transparent;
+  color: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.react-flow__node.selected {
+  outline: none;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* Edge Labels (SVG format) */
+.react-flow .react-flow__edge-textbg {
+  fill: #1E293B !important;
+  stroke: #334155 !important;
+  stroke-width: 1px;
+  rx: 6px !important;
+  ry: 6px !important;
+}
+
+.react-flow .react-flow__edge-text {
+  fill: #E2E8F0 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+/* Edge Labels (HTML/ForeignObject format fallback) */
+.react-flow .react-flow__edge-label,
+.react-flow__edge-label {
+  background: #1E293B !important;
+  color: #E2E8F0 !important;
+  border: 1px solid #334155 !important;
+  border-radius: 6px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 2px 8px !important;
+}
+
+.react-flow__handle {
+  background-color: #94A3B8;
+  border-color: #0F172A;
+}
+
+.react-flow__edge-path {
+  stroke: #64748B;
+  stroke-width: 2;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #6366F1;
+}
+
+.react-flow__background {
+  background-color: #0F172A;
+}
+
+.react-flow__minimap {
+  background-color: #0F172A;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.react-flow__minimap-mask {
+  fill: rgba(10, 15, 30, 0.75) !important;
+}
+
+.react-flow__minimap-node {
+  fill: #6366f1 !important;
+  stroke: #818cf8 !important;
+  stroke-width: 2px !important;
+}
+
+.react-flow__minimap-edge {
+  stroke: #94a3b8 !important;
+  stroke-width: 3px !important;
+  fill: none !important;
+}
+
+.react-flow__panel {
+  background-color: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+/* Dark theme for Controls (zoom/fit buttons) */
+.react-flow__controls {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid #334155 !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+.react-flow__controls-button {
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid #1E293B !important;
+  color: #94A3B8 !important;
+  fill: #94A3B8 !important;
+  width: 28px !important;
+  height: 28px !important;
+  padding: 5px !important;
+  transition: background-color 0.15s, fill 0.15s !important;
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: none !important;
+}
+
+.react-flow__controls-button:hover {
+  background-color: rgba(99, 102, 241, 0.15) !important;
+  fill: #E2E8F0 !important;
+  color: #E2E8F0 !important;
+}
+
+.react-flow__controls-button svg {
+  fill: inherit !important;
+  max-width: 13px !important;
+  max-height: 13px !important;
+}
