@@ -401,7 +401,7 @@ export default function CanvasPage() {
                         {isSettingsOpen && (
                             <>
                                 <div className="fixed inset-0 z-40" onClick={() => setIsSettingsOpen(false)} />
-                                <div className="absolute top-full right-0 mt-3 w-48 sm:w-56 bg-[#0F172A]/95 backdrop-blur-xl border border-slate-700 rounded-xl shadow-2xl transition-all duration-200 z-50 overflow-hidden animate-in fade-in zoom-in-95">
+                                <div className="absolute top-full right-0 mt-3 w-64 sm:w-56 bg-[#0F172A]/95 backdrop-blur-xl border border-slate-700 rounded-xl shadow-2xl transition-all duration-200 z-50 animate-in fade-in zoom-in-95 max-h-[80vh] overflow-y-auto overflow-x-visible">
                                     <div className="py-2">
                                         <div className="px-4 py-2 flex items-center justify-between">
                                             <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Lang</span>
