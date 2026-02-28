@@ -19,7 +19,7 @@ import { TemplateSelector } from '@/components/TemplateSelector';
 import { getLayoutedElements } from '@/lib/autoLayout';
 import { SmartBuilderModal } from '@/components/SmartBuilderModal';
 import { DiscordIcon } from '@/components/DiscordIcon';
-import { Download, Sparkles, Activity, Wrench, MousePointer2, LayoutTemplate, GitBranch, TerminalSquare, Play, Settings, Eraser, Crosshair, ChevronRight, ChevronLeft, Github, MessageCircle, X } from 'lucide-react';
+import { Download, Sparkles, Activity, Wrench, MousePointer2, LayoutTemplate, GitBranch, TerminalSquare, Play, Settings, Eraser, Crosshair, ChevronRight, ChevronLeft, Github, MessageCircle, X, Trash2, Paintbrush } from 'lucide-react';
 
 const CANVAS_DICT = {
     en: {
@@ -80,6 +80,15 @@ export default function CanvasPage() {
     const [isAuditPanelOpen, setIsAuditPanelOpen] = useState(false);
     const [flowTitle, setFlowTitle] = useState('Untitled Flow');
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [selectedEdgeId, setSelectedEdgeId] = useState<string | null>(null);
+
+    const handleSelectionChange = useCallback(({ edges, nodes }: any) => {
+        if (edges.length === 1 && nodes.length === 0) {
+            setSelectedEdgeId(edges[0].id);
+        } else {
+            setSelectedEdgeId(null);
+        }
+    }, []);
 
     const onNodesChange = useCallback(
         (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds) as FluscopeNode[]),
@@ -535,6 +544,19 @@ export default function CanvasPage() {
                 </button>
             </div>
 
+            {/* Edge Toolbar UI Overlay — Absolute in viewport layer */}
+            {selectedEdgeId && (
+                <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[110] flex items-center bg-slate-900/95 backdrop-blur-xl border border-slate-700/50 rounded-full shadow-2xl p-1.5 gap-1 animate-in slide-in-from-bottom-4 pointer-events-auto">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-3">Edge</span>
+                    <div className="w-px h-4 bg-slate-800"></div>
+                    <button onClick={() => setEdges((eds) => eds.map((e) => e.id === selectedEdgeId ? { ...e, animated: false, style: { strokeDasharray: 'none', stroke: '#818cf8', strokeWidth: 3 } } : e))} className="p-2 hover:bg-slate-800 hover:text-white text-slate-400 rounded-full transition" title="Solid"><Paintbrush size={15} /></button>
+                    <button onClick={() => setEdges((eds) => eds.map((e) => e.id === selectedEdgeId ? { ...e, animated: false, style: { strokeDasharray: '5, 5', stroke: '#818cf8', strokeWidth: 3 } } : e))} className="p-2 hover:bg-slate-800 hover:text-white text-slate-400 rounded-full transition" title="Dashed"><Paintbrush size={15} /></button>
+                    <button onClick={() => setEdges((eds) => eds.map((e) => e.id === selectedEdgeId ? { ...e, animated: false, style: { strokeDasharray: '2, 5', stroke: '#818cf8', strokeWidth: 3 } } : e))} className="p-2 hover:bg-slate-800 hover:text-white text-slate-400 rounded-full transition" title="Dotted"><Paintbrush size={15} /></button>
+                    <div className="w-px h-4 bg-slate-800 ml-1"></div>
+                    <button onClick={() => setEdges((eds) => eds.filter((e) => e.id !== selectedEdgeId))} className="p-2 hover:bg-red-500/20 hover:text-red-400 text-slate-400 rounded-full transition mx-1" title="Delete"><Trash2 size={15} /></button>
+                </div>
+            )}
+
             {/* Canvas Area */}
             <div className="flex-1 relative z-10 border-r border-slate-800">
                 <Canvas
@@ -548,6 +570,7 @@ export default function CanvasPage() {
                     updateNodeLabel={handleNodeLabelChange}
                     drawModeEnabled={drawModeEnabled}
                     clearDrawingsSignal={clearDrawingsSignal}
+                    onSelectionChange={handleSelectionChange}
                 />
             </div>
 

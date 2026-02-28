@@ -195,6 +195,7 @@ interface CanvasProps {
     updateNodeLabel?: (id: string, label: string) => void;
     drawModeEnabled?: boolean;
     clearDrawingsSignal?: number;
+    onSelectionChange?: (params: { nodes: any[], edges: any[] }) => void;
 }
 
 function CanvasInner({
@@ -207,7 +208,8 @@ function CanvasInner({
     drawModeEnabled,
     clearDrawingsSignal,
     setNodes,
-    setEdges
+    setEdges,
+    onSelectionChange
 }: CanvasProps) {
     const { screenToFlowPosition } = useReactFlow();
 
@@ -415,17 +417,6 @@ function CanvasInner({
         setHistoryCounter(c => c + 1);
     };
 
-    // Track selected element for Canvas-level floating context tools if needed natively
-    const [selectedEdgeId, setSelectedEdgeId] = useState<string | null>(null);
-    const onSelectionChange = useCallback(({ edges, nodes }: any) => {
-        if (edges.length === 1 && nodes.length === 0) {
-            setSelectedEdgeId(edges[0].id);
-        } else {
-            setSelectedEdgeId(null);
-        }
-    }, []);
-
-    // Make canvas overlay conditional on clicking
     return (
         <div id="fluscope-canvas-container" className="w-full h-full bg-[#0F172A] relative overflow-hidden">
 
@@ -434,19 +425,6 @@ function CanvasInner({
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-500 font-medium text-lg pointer-events-none select-none flex flex-col items-center gap-3 z-0">
                     <Sparkles className="w-8 h-8 opacity-20" />
                     <span>Add a node or generate a flow to begin.</span>
-                </div>
-            )}
-
-            {/* Edge Toolbar UI Overlay */}
-            {selectedEdgeId && (
-                <div className="absolute bottom-20 sm:bottom-8 left-1/2 -translate-x-1/2 z-[100] flex items-center bg-slate-800/95 border border-slate-700/50 rounded-full shadow-2xl p-1.5 gap-1 animate-in slide-in-from-bottom-4">
-                    <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3">Edge</span>
-                    <div className="w-px h-4 bg-slate-700"></div>
-                    <button onClick={() => setEdges((eds: any) => eds.map((e: any) => e.id === selectedEdgeId ? { ...e, animated: false, style: { strokeDasharray: 'none', stroke: '#818cf8', strokeWidth: 3 } } : e))} className="p-1.5 hover:bg-slate-700 hover:text-white text-slate-400 rounded-full transition" title="Solid"><Paintbrush size={14} /></button>
-                    <button onClick={() => setEdges((eds: any) => eds.map((e: any) => e.id === selectedEdgeId ? { ...e, animated: false, style: { strokeDasharray: '5, 5', stroke: '#818cf8', strokeWidth: 3 } } : e))} className="p-1.5 hover:bg-slate-700 hover:text-white text-slate-400 rounded-full transition" title="Dashed"><Paintbrush size={14} /></button>
-                    <button onClick={() => setEdges((eds: any) => eds.map((e: any) => e.id === selectedEdgeId ? { ...e, animated: false, style: { strokeDasharray: '2, 5', stroke: '#818cf8', strokeWidth: 3 } } : e))} className="p-1.5 hover:bg-slate-700 hover:text-white text-slate-400 rounded-full transition" title="Dotted"><Paintbrush size={14} /></button>
-                    <div className="w-px h-4 bg-slate-700"></div>
-                    <button onClick={() => setEdges((eds: any) => eds.filter((e: any) => e.id !== selectedEdgeId))} className="p-1.5 hover:bg-red-500/20 hover:text-red-400 text-slate-400 rounded-full transition mx-1" title="Delete"><Trash2 size={14} /></button>
                 </div>
             )}
 
@@ -498,90 +476,94 @@ function CanvasInner({
             </ReactFlow>
 
             {/* Pure Screen-space Absolute Drawing Capture Layer Overlay */}
-            {drawModeEnabled && (
-                <div
-                    style={{ touchAction: 'none' }}
-                    className="absolute inset-0 z-[40] cursor-crosshair bg-black/0"
-                    onPointerDown={startDraw}
-                    onPointerMove={draw}
-                    onPointerUp={stopDraw}
-                    onPointerLeave={stopDraw}
-                    onPointerCancel={stopDraw}
-                >
-                    <svg width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0, overflow: 'visible', pointerEvents: 'none' }}>
-                        {(() => {
-                            const pts = laserPointsRef.current;
-                            if (pts.length < 2) return null;
-                            const now = Date.now();
-                            const LIFETIME = 3000; // ms until fully gone
+            {
+                drawModeEnabled && (
+                    <div
+                        style={{ touchAction: 'none' }}
+                        className="absolute inset-0 z-[40] cursor-crosshair bg-black/0"
+                        onPointerDown={startDraw}
+                        onPointerMove={draw}
+                        onPointerUp={stopDraw}
+                        onPointerLeave={stopDraw}
+                        onPointerCancel={stopDraw}
+                    >
+                        <svg width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0, overflow: 'visible', pointerEvents: 'none' }}>
+                            {(() => {
+                                const pts = laserPointsRef.current;
+                                if (pts.length < 2) return null;
+                                const now = Date.now();
+                                const LIFETIME = 3000; // ms until fully gone
 
-                            // Split into N chunks — each gets opacity based on its age
-                            const N = 14;
-                            const chunkSize = Math.max(2, Math.ceil(pts.length / N));
-                            const chunks: { d: string; opacity: number }[] = [];
+                                // Split into N chunks — each gets opacity based on its age
+                                const N = 14;
+                                const chunkSize = Math.max(2, Math.ceil(pts.length / N));
+                                const chunks: { d: string; opacity: number }[] = [];
 
-                            for (let i = 0; i < pts.length - 1; i += chunkSize) {
-                                const slice = pts.slice(i, i + chunkSize + 1);
-                                if (slice.length < 2) continue;
-                                const midPoint = slice[Math.floor(slice.length / 2)];
-                                const age = now - (midPoint.time || now);
-                                const rawOpacity = Math.max(0, 1 - age / LIFETIME);
-                                // Ease out: square root so fresh segments stay bright longer
-                                const opacity = Math.sqrt(rawOpacity);
-                                const d = slice.map((p, idx) => `${idx === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
-                                chunks.push({ d, opacity });
-                            }
+                                for (let i = 0; i < pts.length - 1; i += chunkSize) {
+                                    const slice = pts.slice(i, i + chunkSize + 1);
+                                    if (slice.length < 2) continue;
+                                    const midPoint = slice[Math.floor(slice.length / 2)];
+                                    const age = now - (midPoint.time || now);
+                                    const rawOpacity = Math.max(0, 1 - age / LIFETIME);
+                                    // Ease out: square root so fresh segments stay bright longer
+                                    const opacity = Math.sqrt(rawOpacity);
+                                    const d = slice.map((p, idx) => `${idx === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+                                    chunks.push({ d, opacity });
+                                }
 
-                            const tip = pts[pts.length - 1];
-                            const tipAge = now - (tip.time || now);
-                            const tipOpacity = Math.max(0, 1 - tipAge / LIFETIME);
+                                const tip = pts[pts.length - 1];
+                                const tipAge = now - (tip.time || now);
+                                const tipOpacity = Math.max(0, 1 - tipAge / LIFETIME);
 
-                            return (
-                                <>
-                                    {/* Aura chunks */}
-                                    {chunks.map((c, i) => (
-                                        <path key={`aura-${i}`} d={c.d}
-                                            fill="none" stroke="#818cf8" strokeWidth={10}
-                                            strokeLinecap="round" strokeLinejoin="round"
-                                            opacity={c.opacity * 0.06}
-                                            style={{ filter: 'blur(5px)' }}
+                                return (
+                                    <>
+                                        {/* Aura chunks */}
+                                        {chunks.map((c, i) => (
+                                            <path key={`aura-${i}`} d={c.d}
+                                                fill="none" stroke="#818cf8" strokeWidth={10}
+                                                strokeLinecap="round" strokeLinejoin="round"
+                                                opacity={c.opacity * 0.06}
+                                                style={{ filter: 'blur(5px)' }}
+                                            />
+                                        ))}
+                                        {/* Trail chunks */}
+                                        {chunks.map((c, i) => (
+                                            <path key={`trail-${i}`} d={c.d}
+                                                fill="none" stroke="#818cf8" strokeWidth={2.5}
+                                                strokeLinecap="round" strokeLinejoin="round"
+                                                opacity={c.opacity * 0.65}
+                                                style={{ filter: 'drop-shadow(0 0 3px rgba(129,140,248,0.5))' }}
+                                            />
+                                        ))}
+                                        {/* Tip */}
+                                        <circle cx={tip.x} cy={tip.y} r={4}
+                                            fill="#c4b5fd" opacity={tipOpacity * 0.92}
+                                            style={{ filter: 'drop-shadow(0 0 5px #818cf8)' }}
                                         />
-                                    ))}
-                                    {/* Trail chunks */}
-                                    {chunks.map((c, i) => (
-                                        <path key={`trail-${i}`} d={c.d}
-                                            fill="none" stroke="#818cf8" strokeWidth={2.5}
-                                            strokeLinecap="round" strokeLinejoin="round"
-                                            opacity={c.opacity * 0.65}
-                                            style={{ filter: 'drop-shadow(0 0 3px rgba(129,140,248,0.5))' }}
+                                        <circle cx={tip.x} cy={tip.y} r={8}
+                                            fill="#818cf8" opacity={tipOpacity * 0.12}
+                                            style={{ filter: 'blur(3px)' }}
                                         />
-                                    ))}
-                                    {/* Tip */}
-                                    <circle cx={tip.x} cy={tip.y} r={4}
-                                        fill="#c4b5fd" opacity={tipOpacity * 0.92}
-                                        style={{ filter: 'drop-shadow(0 0 5px #818cf8)' }}
-                                    />
-                                    <circle cx={tip.x} cy={tip.y} r={8}
-                                        fill="#818cf8" opacity={tipOpacity * 0.12}
-                                        style={{ filter: 'blur(3px)' }}
-                                    />
-                                </>
-                            );
-                        })()}
-                    </svg>
-                </div>
-            )}
+                                    </>
+                                );
+                            })()}
+                        </svg>
+                    </div>
+                )
+            }
 
-            {menu && (
-                <CanvasContextMenu
-                    x={menu.x}
-                    y={menu.y}
-                    title={menu.type === 'node' ? 'Node Actions' : menu.type === 'edge' ? 'Edge Actions' : 'Canvas Actions'}
-                    items={getContextMenuItems()}
-                    onClose={() => setMenu(null)}
-                />
-            )}
-        </div>
+            {
+                menu && (
+                    <CanvasContextMenu
+                        x={menu.x}
+                        y={menu.y}
+                        title={menu.type === 'node' ? 'Node Actions' : menu.type === 'edge' ? 'Edge Actions' : 'Canvas Actions'}
+                        items={getContextMenuItems()}
+                        onClose={() => setMenu(null)}
+                    />
+                )
+            }
+        </div >
     );
 }
 
