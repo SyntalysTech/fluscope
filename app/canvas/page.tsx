@@ -18,6 +18,7 @@ import { LanguageSelector, Lang } from '@/components/LanguageSelector';
 import { TemplateSelector } from '@/components/TemplateSelector';
 import { getLayoutedElements } from '@/lib/autoLayout';
 import { SmartBuilderModal } from '@/components/SmartBuilderModal';
+import { DiscordIcon } from '@/components/DiscordIcon';
 import { Sparkles, Activity, Wrench, MousePointer2, LayoutTemplate, GitBranch, TerminalSquare, Play, Settings, Eraser, Crosshair, ChevronRight, ChevronLeft, Github, MessageCircle } from 'lucide-react';
 
 const CANVAS_DICT = {
@@ -412,7 +413,7 @@ export default function CanvasPage() {
                                 <Github size={14} /> {CANVAS_DICT[lang].github}
                             </a>
                             <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="w-full text-left px-4 py-2.5 text-sm text-slate-400 hover:bg-slate-800 hover:text-[#5865F2] transition flex items-center gap-2">
-                                <MessageCircle size={14} /> {CANVAS_DICT[lang].discord}
+                                <DiscordIcon size={14} /> {CANVAS_DICT[lang].discord}
                             </a>
                             <div className="h-px bg-slate-800 my-1" />
                             <button onClick={handleExportPng} className="w-full text-left px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">

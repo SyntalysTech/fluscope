@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowRight, CheckCircle2, GitBranch, ShieldAlert, Sparkles, Zap, Lock, RefreshCw, Download, Brain, ChevronDown, Github, MessageCircle } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { LanguageSelector, Lang } from '@/components/LanguageSelector';
+import { DiscordIcon } from '@/components/DiscordIcon';
 
 // ─── Translations & Dictionaries ─────────────────────────────────────────────
 
@@ -501,7 +502,7 @@ export default function Home() {
           <Github size={20} />
         </a>
         <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-[#5865F2] rounded-xl shadow-xl transition-all" title="Discord">
-          <MessageCircle size={20} />
+          <DiscordIcon size={20} />
         </a>
         <LanguageSelector lang={lang} setLang={setLang} />
         <Link href="/canvas" className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white text-sm font-semibold rounded-xl shadow-xl shadow-indigo-900/30 transition-all whitespace-nowrap">
@@ -701,7 +702,7 @@ export default function Home() {
             </a>
             <span className="text-slate-800">·</span>
             <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="hover:text-[#5865F2] transition-colors" title="Discord">
-              <MessageCircle size={16} />
+              <DiscordIcon size={16} />
             </a>
             <span className="text-slate-800">·</span>
             {t.footerTags.map((tag, i) => (

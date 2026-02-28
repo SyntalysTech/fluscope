@@ -22,6 +22,7 @@ import {
     MessageCircle
 } from 'lucide-react';
 import { LanguageSelector, Lang } from '@/components/LanguageSelector';
+import { DiscordIcon } from '@/components/DiscordIcon';
 
 const DICT = {
     en: {
@@ -554,7 +555,7 @@ export default function DocsPage() {
                         <Github size={20} />
                     </a>
                     <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-[#5865F2] transition-colors" title="Discord">
-                        <MessageCircle size={20} />
+                        <DiscordIcon size={20} />
                     </a>
                     <LanguageSelector lang={lang} setLang={setLang} />
                     <Link href="/canvas" className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg transition-all shadow-lg shadow-indigo-900/40">
@@ -633,7 +634,7 @@ export default function DocsPage() {
                                 </a>
                                 <span className="text-slate-800 text-base">·</span>
                                 <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="hover:text-[#5865F2] transition-colors normal-case" title="Discord">
-                                    <MessageCircle size={14} />
+                                    <DiscordIcon size={14} />
                                 </a>
                                 <span className="text-slate-800 text-base">·</span>
                                 {t.footerTags.map((tag, i) => (
