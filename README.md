@@ -8,6 +8,8 @@
 
 **Fluscope** is a structural validation workspace for product teams. Map out user flows and automatically detect logical gaps, edge cases, and missing states before writing a single line of code.
 
+[**🌐 Live Demo**](https://fluscope.vercel.app)
+
 ---
 
 ## The Mission

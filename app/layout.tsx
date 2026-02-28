@@ -8,8 +8,33 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Fluscope - Inspect your product flows',
-  description: 'Draw your product flow. Fluscope detects missing states, logic gaps and UX risks.',
+  metadataBase: new URL('https://fluscope.vercel.app'),
+  title: 'Fluscope - Design flows. Ship with confidence.',
+  description: 'Visual product flow canvas with a dual-layer audit engine. Detect logic gaps and UX risks instantly.',
+  keywords: ['product design', 'user flow', 'UX audit', 'node builder', 'logic canvas', 'AI audit'],
+  authors: [{ name: 'Syntalys' }],
+  openGraph: {
+    title: 'Fluscope - Design flows. Ship with confidence.',
+    description: 'The skeleton for your product flows. Structural validation, AI audits, and zero friction.',
+    url: 'https://fluscope.vercel.app',
+    siteName: 'Fluscope',
+    images: [
+      {
+        url: '/logos/logo-horizontal-text-alone-1600x400.png',
+        width: 1200,
+        height: 300,
+        alt: 'Fluscope - Design & Audit Flows',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fluscope - Logic-First Design',
+    description: 'Stop shipping broken flows. Start auditing with Fluscope.',
+    images: ['/logos/logo-horizontal-text-alone-1600x400.png'],
+  },
   icons: {
     icon: '/logos/logo-favicon-64x64.png',
   },
