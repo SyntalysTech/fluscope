@@ -1,4 +1,4 @@
-# 🌊 Fluscope
+# Fluscope
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-indigo.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
@@ -9,38 +9,38 @@
 
 ---
 
-## 🚀 The Mission
+## The Mission
 **Logic-first design.** Fluscope shifts the focus from pixels to the "if-then" of your product, ensuring the skeleton of your user experience is solid. No more discovering missing password recovery or no-logout paths during development.
 
 ---
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Syntalys/fluscope/main/public/logos/logo-horizontal-text-alone-1600x400.png" width="800" />
+  <img src="https://raw.githubusercontent.com/SyntalysTech/fluscope/main/public/logos/logo-horizontal-text-alone-1600x400.png" width="800" alt="Fluscope Banner" />
 </p>
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-### 🧠 Smart Builder (AI-Powered)
+### Smart Builder (AI-Powered)
 Zero-to-flow in seconds. Simply describe your user flow in plain language (e.g., *"Create a subscription flow with Stripe and an email confirmation"*), and Fluscope's AI agent will generate the full logic graph for you.
 
-### 🛡️ Dual-Layer Audit Engine
+### Dual-Layer Audit Engine
 Fluscope doesn't just draw flows; it validates them.
 - **Layer 1: Deterministic Rules**: Instant check for unreachable nodes, dead ends, and graph connectivity issues (< 10ms).
 - **Layer 2: AI Deep Audit**: A semantic audit using GPT-4o-mini that analyzes your flow from three expert perspectives: *System Architect*, *UX Researcher*, and *Security Lead*.
 
-### 🔦 Laser Presentation Mode
+### Laser Presentation Mode
 Built for meetings. Use the interactive Laser Mode to guide your team's eyes during demos without messy annotations.
 
-### 🔒 Privacy-First / Zero Backend
+### Privacy-First / Zero Backend
 - **Zero Telemetry**: Your data stays in your browser.
 - **Local Persistence**: Auto-saves every change to `localStorage`.
 - **JSON Portability**: Import/Export your flows as structured JSON files for backup or sharing.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
 - **Styling**: Tailwind CSS
@@ -51,11 +51,11 @@ Built for meetings. Use the interactive Laser Mode to guide your team's eyes dur
 
 ---
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/fluscope.git
+   git clone https://github.com/SyntalysTech/fluscope.git
    cd fluscope
    ```
 
@@ -82,14 +82,14 @@ Built for meetings. Use the interactive Laser Mode to guide your team's eyes dur
 
 ---
 
-## 📄 License
+## License
 
 Built for product teams by **Syntalys**. Distributed under the MIT License.
 
 ---
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Syntalys/fluscope/main/public/logos/logo-isotope-1024x1024.png" width="40" height="40" />
+  <img src="https://raw.githubusercontent.com/SyntalysTech/fluscope/main/public/logos/logo-isotope-1024x1024.png" width="40" height="40" alt="Fluscope Logo" />
   <br/>
   <b>Fluscope</b> — Stop shipping broken flows. Start auditing.
 </p>
