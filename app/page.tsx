@@ -113,9 +113,9 @@ const DICT = {
 
 const TRANSLATED_FEATURES: Record<Lang, { title: string, desc: string }[]> = {
   en: [
-    { title: 'Visual Canvas', desc: 'Screen, Decision, and Terminal nodes. Drag-and-drop, connect from any handle direction, and auto-layout with one click.' },
-    { title: 'Laser Pointer Mode', desc: 'Activate the laser pointer to highlight paths during standups or design reviews. Fades automatically, no cleanup needed.' },
-    { title: 'AI Smart Builder', desc: 'Describe your flow in plain text. The AI builder generates a full node-graph with connections and labels ready to audit.' },
+    { title: 'AI Smart Builder', desc: 'Describe your flow in plain text. Fluscope generates a full graph with intelligent connections and node placement, getting you to 80% completion in seconds.' },
+    { title: 'Deterministic Rules', desc: 'Rule engine fires in < 10ms, traversing your entire graph to find dead ends, missing error states, and unhandled branching logic.' },
+    { title: 'Auto-Layout Engine', desc: 'Organize complex or AI-generated flows instantly. Our layout algorithm optimizes node positioning for maximum horizontal readability.' },
     { title: 'Dual-layer Audit', desc: 'Deterministic rule engine fires in < 10ms, then GPT-4o-mini runs semantic analysis from architect, security, and UX perspectives.' },
     { title: 'Robustness Score', desc: '0–100 score with severity-weighted deductions per issue. See exactly what is dragging your score down and why.' },
     { title: 'Auto-fix Engine', desc: 'One-click auto-fix for common structural issues. Fluscope rewrites the broken portions of your graph automatically.' },
@@ -123,9 +123,9 @@ const TRANSLATED_FEATURES: Record<Lang, { title: string, desc: string }[]> = {
     { title: 'Session Persistence', desc: 'Every change auto-saves to localStorage. Close the tab, reopen tomorrow — your flow is exactly where you left it.' },
   ],
   es: [
-    { title: 'Canvas Visual', desc: 'Nodos de Pantalla, Decisión y Terminal. Arrastra, suelta, conecta desde cualquier asa y aplica auto-layout con un clic.' },
-    { title: 'Modo Puntero Láser', desc: 'Activa el láser para destacar rutas en standups o revisiones de diseño. Se desvanece solo, sin mantenimiento.' },
-    { title: 'Constructor IA', desc: 'Describe tu flujo en texto plano. El builder IA genera un grafo completo con conexiones y etiquetas listo para auditar.' },
+    { title: 'Constructor IA', desc: 'Describe tu flujo en texto plano. Fluscope genera un grafo completo con conexiones inteligentes y posicionamiento de nodos en segundos.' },
+    { title: 'Reglas Deterministas', desc: 'El motor de reglas recorre tu grafo en < 10ms para encontrar callejones sin salida, estados de error faltantes y lógica de ramificación no gestionada.' },
+    { title: 'Motor de Auto-layout', desc: 'Organiza flujos complejos al instante. Nuestro algoritmo optimiza la posición de los nodos para una legibilidad horizontal máxima.' },
     { title: 'Auditoría Doble Capa', desc: 'Motor de reglas determinista en < 10ms, luego GPT-4o-mini hace análisis semántico desde perspectivas de arquitecto, seguridad y UX.' },
     { title: 'Puntuación de Robustez', desc: 'Score de 0 a 100 con penalizaciones ponderadas por severidad. Ves exactamente qué baja tu puntuación y por qué.' },
     { title: 'Motor de Auto-fix', desc: 'Auto-corrección en un clic para problemas estructurales comunes. Fluscope reescribe las partes rotas de tu grafo automáticamente.' },
@@ -134,10 +134,9 @@ const TRANSLATED_FEATURES: Record<Lang, { title: string, desc: string }[]> = {
   ],
   fr: [
     { title: 'Canvas Visuel', desc: "Nœuds Écran, Décision et Terminal. Glissez-déposez, connectez depuis n'importe quelle poignée et appliquez l'auto-layout en un clic." },
-    {
-      title: 'Mode Pointeur Laser', desc: "Activez le laser pour mettre en évidence les parcours lors des standups ou des revues de design. S'estompe automatiquement, aucun nettoyage."
-    },
-    { title: 'Constructeur IA', desc: 'Décrivez votre flux en texte libre. Le builder IA génère un graphe complet avec connexions et étiquettes prêt à auditer.' },
+    { title: 'Constructeur IA', desc: 'Décrivez votre flux en texte libre. Fluscope génère un graphe complet avec des connexions intelligentes et un placement des nœuds en quelques secondes.' },
+    { title: 'Règles Déterministes', desc: 'Le moteur de règles parcourt votre graphe en < 10ms pour trouver les impasses, les états d\'erreur manquants et la logique non gérée.' },
+    { title: 'Moteur d\'Auto-layout', desc: 'Organisez instantanément des flux complexes. Notre algorithme optimise le positionnement des nœuds pour une lisibilité horizontale maximale.' },
     { title: 'Audit Bicouche', desc: 'Moteur de règles déterministe en < 10ms, puis GPT-4o-mini analyse sémantiquement selon les perspectives architecte, sécurité et UX.' },
     { title: 'Score de Robustesse', desc: 'Score de 0 à 100 avec déductions pondérées par sévérité. Voyez exactement ce qui fait baisser votre score et pourquoi.' },
     { title: "Moteur d'Auto-correction", desc: 'Correction automatique en un clic pour les problèmes structurels courants. Fluscope réécrit les parties cassées de votre graphe automatiquement.' },
@@ -569,7 +568,7 @@ export default function Home() {
         {/* ── Features (3 Pillars) ────────────────────────────────── */}
         <section id="features" className="w-full max-w-5xl mx-auto px-6 py-24">
           <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Everything in one place.</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3 underline decoration-indigo-500/30 underline-offset-8">Everything in <span className="hero-gtext md:text-3xl">one place</span>.</h2>
             <p className="text-slate-500 max-w-lg mx-auto text-sm">Three focused tools. No switching context.</p>
           </div>
 
@@ -633,7 +632,7 @@ export default function Home() {
         {/* ── How it works ─────────────────────────────────────── */}
         <section id="how-it-works" className="w-full max-w-5xl mx-auto px-6 py-20">
           <div className="text-center mb-14">
-            <h2 className="text-3xl font-bold text-slate-100 mb-3">{t.howTitle}</h2>
+            <h2 className="text-3xl font-bold text-slate-100 mb-3 italic">How it <span className="hero-gtext text-3xl">actually works</span></h2>
             <p className="text-slate-400">{t.howSubtitle}</p>
           </div>
 
@@ -659,7 +658,7 @@ export default function Home() {
         {/* ── Flow types ─────────────────────────────────────────── */}
         < section className="w-full max-w-5xl mx-auto px-6 py-16" >
           <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-slate-100 mb-2">{t.typesTitle}</h2>
+            <h2 className="text-2xl font-bold text-slate-100 mb-2">Domain-aware <span className="hero-gtext text-2xl">Audit Rules</span></h2>
             <p className="text-slate-400 text-sm">{t.typesSubtitle}</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -680,7 +679,7 @@ export default function Home() {
               <Image src="/logos/logo-isotope-1024x1024.png" alt="Fluscope" width={48} height={48} className="rounded-xl opacity-80" />
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-100 mb-4">
-              {t.ctaTitle1}<br className="hidden sm:block" /> {t.ctaTitle2}
+              Stop shipping <span className="hero-gtext text-2xl sm:text-3xl md:text-4xl">broken flows</span>.<br className="hidden sm:block" /> Start auditing.
             </h2>
             <p className="text-sm sm:text-base text-slate-400 mb-8 max-w-md mx-auto">
               {t.ctaSubtitle}
