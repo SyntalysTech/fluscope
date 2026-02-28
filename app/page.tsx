@@ -314,7 +314,6 @@ function AnimatedFlowDemo() {
   const nodeMap = Object.fromEntries(DEMO_NODES.map(n => [n.id, n]));
 
   return (
-  return (
     <div className="relative w-full rounded-2xl overflow-hidden bg-[#0d1424] border border-slate-800 shadow-2xl h-[400px] sm:h-[580px]">
       {/* Dot grid background */}
       <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
