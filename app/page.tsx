@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, GitBranch, ShieldAlert, Sparkles, Zap, Lock, RefreshCw, Download, Brain, ChevronDown, Github, MessageCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle2, GitBranch, ShieldAlert, Sparkles, Zap, Lock, RefreshCw, Download, Brain, ChevronDown, Github, MessageCircle, BookOpen } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { LanguageSelector, Lang } from '@/components/LanguageSelector';
 import { DiscordIcon } from '@/components/DiscordIcon';
@@ -505,6 +505,10 @@ export default function Home() {
             <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-[#5865F2] rounded-xl shadow-xl transition-all hidden xs:flex" title="Discord">
               <DiscordIcon size={18} className="sm:w-5 sm:h-5" />
             </a>
+            <Link href="/docs" className="p-2 sm:p-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl shadow-xl transition-all lg:hidden flex items-center gap-2" title="Docs">
+              <span className="text-[10px] font-bold uppercase tracking-tight hidden xs:block">Docs</span>
+              <BookOpen size={18} className="sm:w-5 sm:h-5" />
+            </Link>
             <LanguageSelector lang={lang} setLang={setLang} />
             <Link href="/canvas" className="px-3 sm:px-4 py-2 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white text-[11px] sm:text-sm font-semibold rounded-xl shadow-xl shadow-indigo-900/30 transition-all whitespace-nowrap">
               {t.navCanvas}
