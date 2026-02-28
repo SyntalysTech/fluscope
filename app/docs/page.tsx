@@ -18,7 +18,8 @@ import {
     Zap,
     Download,
     Cpu,
-    Github
+    Github,
+    MessageCircle
 } from 'lucide-react';
 import { LanguageSelector, Lang } from '@/components/LanguageSelector';
 
@@ -26,6 +27,7 @@ const DICT = {
     en: {
         navHome: "Home",
         navKb: "Knowledge Base",
+        navDiscord: "Discord",
         btnCanvas: "Open Canvas",
         footerText: "Fluscope © 2025 — Built for product teams.",
         footerTags: ["No database", "No tracking", "100% client-side"]
@@ -33,6 +35,7 @@ const DICT = {
     es: {
         navHome: "Inicio",
         navKb: "Base de Conocimiento",
+        navDiscord: "Discord",
         btnCanvas: "Abrir Canvas",
         footerText: "Fluscope © 2025 — Hecho para equipos de producto.",
         footerTags: ["Sin base de datos", "Sin rastreo", "100% del lado del cliente"]
@@ -40,6 +43,7 @@ const DICT = {
     fr: {
         navHome: "Accueil",
         navKb: "Base de connaissances",
+        navDiscord: "Discord",
         btnCanvas: "Ouvrir Canvas",
         footerText: "Fluscope © 2025 — Conçu pour les équipes produit.",
         footerTags: ["Pas de BDD", "Aucun suivi", "100% côté client"]
@@ -546,8 +550,11 @@ export default function DocsPage() {
                     </nav>
                 </div>
                 <div className="flex items-center gap-3">
-                    <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-white transition-colors" title="View Source on GitHub">
+                    <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-white transition-colors" title="GitHub">
                         <Github size={20} />
+                    </a>
+                    <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-[#5865F2] transition-colors" title="Discord">
+                        <MessageCircle size={20} />
                     </a>
                     <LanguageSelector lang={lang} setLang={setLang} />
                     <Link href="/canvas" className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg transition-all shadow-lg shadow-indigo-900/40">
@@ -623,6 +630,10 @@ export default function DocsPage() {
                             <div className="flex flex-wrap justify-center items-center gap-4 text-[10px] text-slate-600 font-bold uppercase tracking-widest">
                                 <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="hover:text-slate-400 transition-colors normal-case" title="GitHub">
                                     <Github size={14} />
+                                </a>
+                                <span className="text-slate-800 text-base">·</span>
+                                <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="hover:text-[#5865F2] transition-colors normal-case" title="Discord">
+                                    <MessageCircle size={14} />
                                 </a>
                                 <span className="text-slate-800 text-base">·</span>
                                 {t.footerTags.map((tag, i) => (

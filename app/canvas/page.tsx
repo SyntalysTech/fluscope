@@ -18,7 +18,7 @@ import { LanguageSelector, Lang } from '@/components/LanguageSelector';
 import { TemplateSelector } from '@/components/TemplateSelector';
 import { getLayoutedElements } from '@/lib/autoLayout';
 import { SmartBuilderModal } from '@/components/SmartBuilderModal';
-import { Sparkles, Activity, Wrench, MousePointer2, LayoutTemplate, GitBranch, TerminalSquare, Play, Settings, Eraser, Crosshair, ChevronRight, ChevronLeft, Github } from 'lucide-react';
+import { Sparkles, Activity, Wrench, MousePointer2, LayoutTemplate, GitBranch, TerminalSquare, Play, Settings, Eraser, Crosshair, ChevronRight, ChevronLeft, Github, MessageCircle } from 'lucide-react';
 
 const CANVAS_DICT = {
     en: {
@@ -26,6 +26,7 @@ const CANVAS_DICT = {
         create: "Create",
         addScreen: "Add Screen", addDecision: "Add Decision", addTerminal: "Add Terminal",
         genBrief: "Generate from Brief", loadAuth: "Load Example (Auth)", loadBroken: "Load Broken Demo",
+        discord: "Join Discord",
         tools: "Tools", laserMode: "Laser Pointer",
         github: "View on GitHub",
         exportJson: "Export JSON", exportPng: "Export PNG", resetCanvas: "Reset Canvas"
@@ -35,6 +36,7 @@ const CANVAS_DICT = {
         create: "Crear",
         addScreen: "Añadir Pantalla", addDecision: "Añadir Decisión", addTerminal: "Añadir Terminal",
         genBrief: "Generar desde Brief", loadAuth: "Ejemplo de Autenticación", loadBroken: "Demo Rota",
+        discord: "Unirse a Discord",
         tools: "Herramientas", laserMode: "Puntero Láser",
         github: "Ver en GitHub",
         exportJson: "Exportar JSON", exportPng: "Exportar PNG", resetCanvas: "Vaciar Todo"
@@ -44,6 +46,7 @@ const CANVAS_DICT = {
         create: "Créer",
         addScreen: "Ajouter Écran", addDecision: "Ajouter Décision", addTerminal: "Ajouter Terminal",
         genBrief: "Générer via Brief", loadAuth: "Exemple (Auth)", loadBroken: "Démo Cassée",
+        discord: "Rejoindre Discord",
         tools: "Outils", laserMode: "Pointeur Laser",
         github: "Voir sur GitHub",
         exportJson: "Exporter JSON", exportPng: "Exporter PNG", resetCanvas: "Réinitialiser"
@@ -407,6 +410,9 @@ export default function CanvasPage() {
                             <div className="h-px bg-slate-800 my-1" />
                             <a href="https://github.com/SyntalysTech/fluscope" target="_blank" rel="noopener noreferrer" className="w-full text-left px-4 py-2.5 text-sm text-slate-400 hover:bg-slate-800 hover:text-white transition flex items-center gap-2">
                                 <Github size={14} /> {CANVAS_DICT[lang].github}
+                            </a>
+                            <a href="https://discord.gg/atQEZvhwfy" target="_blank" rel="noopener noreferrer" className="w-full text-left px-4 py-2.5 text-sm text-slate-400 hover:bg-slate-800 hover:text-[#5865F2] transition flex items-center gap-2">
+                                <MessageCircle size={14} /> {CANVAS_DICT[lang].discord}
                             </a>
                             <div className="h-px bg-slate-800 my-1" />
                             <button onClick={handleExportPng} className="w-full text-left px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">

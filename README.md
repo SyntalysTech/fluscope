@@ -4,6 +4,7 @@
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
 [![OpenAI](https://img.shields.io/badge/AI-GPT--4o--mini-fuchsia?logo=openai)](https://openai.com/)
 [![Deployment: Vercel](https://img.shields.io/badge/Deployment-Vercel-black?logo=vercel)](https://vercel.com/)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Us-7289DA?logo=discord)](https://discord.gg/atQEZvhwfy)
 
 **Fluscope** is a structural validation workspace for product teams. Map out user flows and automatically detect logical gaps, edge cases, and missing states before writing a single line of code.
 
@@ -92,4 +93,6 @@ Built for product teams by **Syntalys**. Distributed under the MIT License.
   <img src="https://raw.githubusercontent.com/SyntalysTech/fluscope/main/public/logos/logo-isotope-1024x1024.png" width="40" height="40" alt="Fluscope Logo" />
   <br/>
   <b>Fluscope</b> — Stop shipping broken flows. Start auditing.
+  <br/>
+  <a href="https://discord.gg/atQEZvhwfy">Join our Discord Community</a>
 </p>
