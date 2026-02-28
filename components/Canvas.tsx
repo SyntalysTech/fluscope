@@ -439,7 +439,7 @@ function CanvasInner({
 
             {/* Edge Toolbar UI Overlay */}
             {selectedEdgeId && (
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center bg-slate-800/90 border border-slate-700/50 rounded-full shadow-2xl p-1.5 gap-1 animate-in slide-in-from-bottom-4">
+                <div className="absolute bottom-20 sm:bottom-8 left-1/2 -translate-x-1/2 z-[100] flex items-center bg-slate-800/95 border border-slate-700/50 rounded-full shadow-2xl p-1.5 gap-1 animate-in slide-in-from-bottom-4">
                     <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3">Edge</span>
                     <div className="w-px h-4 bg-slate-700"></div>
                     <button onClick={() => setEdges((eds: any) => eds.map((e: any) => e.id === selectedEdgeId ? { ...e, animated: false, style: { strokeDasharray: 'none', stroke: '#818cf8', strokeWidth: 3 } } : e))} className="p-1.5 hover:bg-slate-700 hover:text-white text-slate-400 rounded-full transition" title="Solid"><Paintbrush size={14} /></button>
