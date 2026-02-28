@@ -14,10 +14,14 @@ export function LanguageSelector({ lang, setLang }: { lang: Lang; setLang: (l: L
     const current = langs.find(l => l.code === lang) || langs[0];
 
     return (
-        <div className="relative">
+        <div className="relative inline-block text-left">
             <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-1.5 px-3 py-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-300 rounded-xl shadow-xl transition-all font-medium text-xs"
+                type="button"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setIsOpen(!isOpen);
+                }}
+                className="flex items-center gap-1.5 px-3 py-2.5 bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/60 hover:bg-slate-800 text-slate-300 rounded-xl shadow-xl transition-all font-medium text-xs touch-manipulation"
             >
                 <span className="text-sm">{current.flag}</span>
                 <span className="hidden sm:inline tracking-wide">{current.label}</span>
